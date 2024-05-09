@@ -25,7 +25,7 @@ public class DataConnection {
     }
 
     public static void createStatement() {
-        String url = "jdbc:mysql://localhost:3306/qlcb";
+        String url = "jdbc:mysql://localhost:3306/qlcb3";
 
         String user = "root";
         String pass = "";

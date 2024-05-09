@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="375.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.quan_ly_tuyen_bay.Controller.DangKyController">
+    <children>
+        <AnchorPane prefHeight="403.0" prefWidth="693.0" style="-fx-background-color: #87efa;">
+            <children>
+                <ImageView fitHeight="403.0" fitWidth="727.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Image/anhnen.jpg" />
+                    </image>
+                </ImageView>
+                <AnchorPane layoutX="355.0" layoutY="45.0" prefHeight="309.0" prefWidth="303.0" style="-fx-background-color: #87cefa;">
+                    <children>
+                        <Label alignment="CENTER" contentDisplay="RIGHT" layoutX="40.0" layoutY="14.0" prefHeight="63.0" prefWidth="232.0" text="Đăng Kí">
+                            <font>
+                                <Font name="Times New Roman Bold" size="46.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="txt_tendn" layoutX="7.0" layoutY="96.0" prefHeight="25.0" prefWidth="134.0" />
+                        <TextField fx:id="txt_mk" layoutX="7.0" layoutY="142.0" prefHeight="25.0" prefWidth="134.0" />
+                        <Label layoutX="7.0" layoutY="77.0" prefHeight="19.0" prefWidth="99.0" text="Tên Đăng Nhập" />
+                        <Label layoutX="7.0" layoutY="121.0" prefHeight="19.0" prefWidth="84.0" text="Mật Khẩu" />
+                        <Button fx:id="btndk" layoutX="73.0" layoutY="223.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #f0f8ff;" text="Đăng Kí" />
+                        <CheckBox fx:id="ckbhienmk" layoutX="144.0" layoutY="261.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="118.0" text="Hiện Mật Khẩu" />
+                  <Label layoutX="164.0" layoutY="77.0" prefHeight="19.0" prefWidth="99.0" text="Họ và Tên " />
+                  <TextField fx:id="txt_hoten" layoutX="159.0" layoutY="96.0" prefHeight="25.0" prefWidth="134.0" />
+                  <Label layoutX="161.0" layoutY="121.0" prefHeight="19.0" prefWidth="84.0" text="Số Điện Thoại" />
+                  <TextField fx:id="txt_sdt" layoutX="159.0" layoutY="142.0" prefHeight="25.0" prefWidth="134.0" />
+                  <Label layoutX="7.0" layoutY="167.0" prefHeight="19.0" prefWidth="118.0" text="Xác Thực Mật Khẩu" />
+                  <TextField fx:id="txt_xacthucmk" layoutX="7.0" layoutY="186.0" prefHeight="25.0" prefWidth="134.0" />
+                  <CheckBox fx:id="ckbnhanvien" layoutX="144.0" layoutY="190.0" mnemonicParsing="false" text="Nhân Viên " />
+                  <CheckBox fx:id="ckbquanli" layoutX="226.0" layoutY="190.0" mnemonicParsing="false" text="Quản Lí" />
+                  <Button layoutX="48.0" layoutY="257.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Đăng Nhập" />
+                    </children>
+                </AnchorPane>
+            <Label layoutX="670.0" layoutY="-2.0" prefHeight="17.0" prefWidth="18.0" text="X" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Label>
+            </children></AnchorPane>
+    </children>
+</AnchorPane>

@@ -5,6 +5,7 @@ import com.example.quan_ly_tuyen_bay.Controller.Controller;
 import com.example.quan_ly_tuyen_bay.Model.*;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -125,6 +126,23 @@ public class LoadData {
         return veArrayList;
     }
 
+    public static void loadTableTaiKhoan(){
+
+        ResultSet rs= DataConnection.retrieveData("select * from taikhoan");
+        try {
+            while(rs.next()){
+                TaiKhoan taiKhoan=new TaiKhoan(
+                        rs.getString(1).trim(),
+                        rs.getString(2).trim(),
+                        rs.getString(3).trim()
+
+                );
+                Controller.taiKhoanArrayList.add(taiKhoan);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public LoadData() {
         Controller.duongBayArrayList.removeAll(Controller.duongBayArrayList);
