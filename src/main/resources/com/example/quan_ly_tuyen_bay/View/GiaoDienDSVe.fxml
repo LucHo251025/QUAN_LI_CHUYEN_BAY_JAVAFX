@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="617.0" prefWidth="1076.0" styleClass="white-bg" stylesheets="@../Design/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.quan_ly_tuyen_bay.Controller.DsVeController">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="210.0" prefHeight="198.0" prefWidth="166.0" stylesheets="@../Design/Style.css">
+         <styleClass>
+            <String fx:value="main-bg" />
+            <String fx:value="shadow" />
+            <String fx:value="radius" />
+         </styleClass>
+         <children>
+            <Pane layoutX="14.0" layoutY="22.0" prefHeight="29.0" prefWidth="32.0" style="-fx-background-color: #ffff;" styleClass="radius" stylesheets="@../Design/Style.css" />
+            <Pane layoutX="14.0" layoutY="84.0" prefHeight="29.0" prefWidth="32.0" style="-fx-background-color: #00FF00;" styleClass="radius" stylesheets="@../Design/Style.css" />
+            <Pane layoutX="14.0" layoutY="144.0" prefHeight="29.0" prefWidth="32.0" style="-fx-background-color: #FF0000;" styleClass="radius" stylesheets="@../Design/Style.css" />
+            <Label alignment="CENTER" layoutX="58.0" layoutY="25.0" prefHeight="23.0" prefWidth="94.0" text="Còn trống" textFill="#fffafa">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="58.0" layoutY="87.0" prefHeight="23.0" prefWidth="94.0" text="Đang chọn" textFill="#fffafa">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="58.0" layoutY="147.0" prefHeight="23.0" prefWidth="94.0" text="Đã chọn" textFill="#fffafa">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ScrollPane fx:id="scrollPane" layoutX="194.0" layoutY="59.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="543.0" prefWidth="651.0" styleClass="shadow" stylesheets="@../Design/Style.css">
+         <content>
+          <AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="533.0" prefWidth="652.0" stylesheets="@../Design/Style.css" />
+         </content>
+      </ScrollPane>
+      <AnchorPane layoutX="866.0" layoutY="202.0" prefHeight="315.0" prefWidth="184.0" stylesheets="@../Design/Style.css">
+         <styleClass>
+            <String fx:value="main-bg" />
+            <String fx:value="shadow" />
+            <String fx:value="radius" />
+         </styleClass>
+         <children>
+            <Label alignment="CENTER" layoutX="70.0" layoutY="5.0" prefHeight="17.0" prefWidth="43.0" text="Vé" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="38.0" prefHeight="23.0" prefWidth="94.0" text="Tên khách hàng" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="110.0" prefHeight="23.0" prefWidth="94.0" text="SĐT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txt_tenkhackhang" layoutX="13.0" layoutY="68.0" prefHeight="29.0" prefWidth="157.0" stylesheets="@../Design/Style.css">
+               <styleClass>
+                  <String fx:value="shadow" />
+                  <String fx:value="radius" />
+               </styleClass></TextField>
+            <TextField fx:id="txt_sdt" layoutX="13.0" layoutY="140.0" prefHeight="29.0" prefWidth="157.0" stylesheets="@../Design/Style.css">
+               <styleClass>
+                  <String fx:value="shadow" />
+                  <String fx:value="radius" />
+               </styleClass></TextField>
+            <Button fx:id="bt_huyve" layoutX="54.0" layoutY="267.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" stylesheets="@../Design/Style.css" text="Hủy Vé" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="btn1" />
+                  <String fx:value="shadow" />
+                  <String fx:value="radius" />
+               </styleClass>
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Button>
+            <Label layoutX="14.0" layoutY="181.0" prefHeight="23.0" prefWidth="94.0" text="Giá" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txt_gia" layoutX="13.0" layoutY="211.0" prefHeight="29.0" prefWidth="157.0" stylesheets="@../Design/Style.css">
+               <styleClass>
+                  <String fx:value="shadow" />
+                  <String fx:value="radius" />
+               </styleClass>
+            </TextField>
+         </children>
+      </AnchorPane>
+      <Label fx:id="lb_title" alignment="CENTER" layoutX="118.0" layoutY="4.0" prefHeight="47.0" prefWidth="854.0" text="Sơ đồ vé">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="14.0" layoutY="9.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="85.0" styleClass="nav-btn" stylesheets="@../Design/Style.css" />
+      <ImageView fitHeight="32.0" fitWidth="85.0" layoutX="37.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/thoat.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

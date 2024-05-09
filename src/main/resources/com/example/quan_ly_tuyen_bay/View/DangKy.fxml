@@ -29,7 +29,7 @@
                         <TextField fx:id="txt_mk" layoutX="7.0" layoutY="142.0" prefHeight="25.0" prefWidth="134.0" />
                         <Label layoutX="7.0" layoutY="77.0" prefHeight="19.0" prefWidth="99.0" text="Tên Đăng Nhập" />
                         <Label layoutX="7.0" layoutY="121.0" prefHeight="19.0" prefWidth="84.0" text="Mật Khẩu" />
-                        <Button fx:id="btndk" layoutX="73.0" layoutY="223.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #f0f8ff;" text="Đăng Kí" />
+                        <Button fx:id="btndk" layoutX="73.0" layoutY="223.0" mnemonicParsing="false" onAction="#DangKy" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #f0f8ff;" text="Đăng Kí" />
                         <CheckBox fx:id="ckbhienmk" layoutX="144.0" layoutY="261.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="118.0" text="Hiện Mật Khẩu" />
                   <Label layoutX="164.0" layoutY="77.0" prefHeight="19.0" prefWidth="99.0" text="Họ và Tên " />
                   <TextField fx:id="txt_hoten" layoutX="159.0" layoutY="96.0" prefHeight="25.0" prefWidth="134.0" />

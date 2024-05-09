@@ -2,6 +2,7 @@ package com.example.quan_ly_tuyen_bay.Model;
 
 
 import com.example.quan_ly_tuyen_bay.Controller.Controller;
+import com.example.quan_ly_tuyen_bay.Controller.DuongBayController;
 
 public class DuongBay {
     private String maDuongBay;
@@ -70,6 +71,25 @@ public class DuongBay {
         }
 
         return null;
+    }
+
+    public int getGia(String maDuongBay){
+        for (DuongBay db : Controller.duongBayArrayList){
+            if(db.getMaDuongBay().equals(maDuongBay)){
+                if(db.getKhoangCach() >=500 && db.getKhoangCach() < 850){
+                    return 2250000;
+                }else if(db.getKhoangCach() >=850 && db.getKhoangCach() < 1000){
+                    return 2790000;
+                }else if(db.getKhoangCach() >=1000 && db.getKhoangCach() < 1280){
+                    return 3400000;
+                }else if(db.getKhoangCach() >=1280){
+                    return 4000000;
+                }else {
+                    return 1000000;
+                }
+            }
+        }
+        return -1;
     }
 
 

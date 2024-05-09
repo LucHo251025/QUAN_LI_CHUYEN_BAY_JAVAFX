@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 
 public class LoadData {
     public static void loadTableMayBay(){
+        Controller.mayBayArrayList.clear();
+
         ResultSet rs = DataConnection.retrieveData("select * from MAYBAY");
 
         try {
@@ -31,6 +33,7 @@ public class LoadData {
     }
 
     public static void loadTableSanBay() {
+        Controller.sanBayArrayList.clear();
         ResultSet rs = DataConnection.retrieveData("select * from SANBAY");
 
         try {
@@ -49,6 +52,8 @@ public class LoadData {
         }
     }
     public static void loadTableDuongBay() {
+
+        Controller.duongBayArrayList.clear();
         ResultSet rs = DataConnection.retrieveData("select * from DUONGBAY");
 
         try {
@@ -59,8 +64,6 @@ public class LoadData {
                         rs.getString(3).trim(),
                         rs.getInt(4)
                 );
-
-
                 Controller.duongBayArrayList.add(duongBay);
             }
         }catch (Exception e){
@@ -69,6 +72,8 @@ public class LoadData {
     }
 
     public static void loadTableChuyenBay() {
+
+        Controller.duongBayArrayList.clear();
         ResultSet rs = DataConnection.retrieveData("select * from CHUYENBAY");
 
         Date datenow = Calendar.getInstance().getTime();
@@ -93,6 +98,8 @@ public class LoadData {
                         cb.setTrangThai(ChuyenBay.HOANTAT);
                     }
                 }
+
+                System.out.println(cb.toString());
 
                 Controller.chuyenBayArrayList.add(cb);
 
@@ -149,7 +156,6 @@ public class LoadData {
         Controller.sanBayArrayList.removeAll(Controller.sanBayArrayList);
         Controller.mayBayArrayList.removeAll(Controller.mayBayArrayList);
         Controller.chuyenBayArrayList.removeAll(Controller.chuyenBayArrayList);
-
 
         loadTableDuongBay();
         loadTableSanBay();

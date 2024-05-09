@@ -12,7 +12,14 @@ public class Controller {
     public static ArrayList<MayBay> mayBayArrayList = new ArrayList<MayBay>();
     public static ArrayList<ChuyenBay> chuyenBayArrayList = new ArrayList<ChuyenBay>();
 
+
    public static ArrayList<TaiKhoan> taiKhoanArrayList = new ArrayList<TaiKhoan>();
    public static TaiKhoan tk=new TaiKhoan();
    public static ArrayList<NhanVien> taiKhoanNhanVienArrayList=new ArrayList<NhanVien>();
+
+    public static ChuyenBay cb = new ChuyenBay();
+    public static int soLuongVeChon;
+    public static ArrayList<String> dsGheChon = new ArrayList<>();
+    public static ArrayList<Ve> dsVeChon = new ArrayList<Ve>();
+
 }

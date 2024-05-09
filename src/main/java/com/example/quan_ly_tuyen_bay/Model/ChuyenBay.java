@@ -1,6 +1,7 @@
 package com.example.quan_ly_tuyen_bay.Model;
 
 
+import com.example.quan_ly_tuyen_bay.Connection.LoadData;
 import com.example.quan_ly_tuyen_bay.Controller.Controller;
 
 import java.time.LocalTime;
@@ -21,7 +22,7 @@ public class ChuyenBay {
     private int trangThai;
     private ArrayList<Ve> veArrayList = new ArrayList<Ve>();
 
-    public void ChuyenBay() {
+    public ChuyenBay() {
 
     }
 
@@ -94,11 +95,16 @@ public class ChuyenBay {
     }
 
     public static DuongBay timDuongBay(String maDuongBay) {
+        LoadData.loadTableDuongBay();
+
         for (DuongBay db : Controller.duongBayArrayList) {
             if (db.getMaDuongBay().equals(maDuongBay)) {
+
+                System.out.println("Đã tìm thấy chuyến bây"+db.getMaSanBayDen());
                 return db;
             }
         }
+
         return null;
     }
 
@@ -117,7 +123,18 @@ public class ChuyenBay {
 
 
     public Date getCBTime() {
-        return new Date(this.ngayBay.getYear(),this.ngayBay.getMonth(),this.ngayBay.getDay(),this.gioBay.getHour(),this.gioBay.getMinute());
+        Date date = this.ngayBay;
+        LocalTime time = this.gioBay;
+
+        // Chuyển đổi giờ và phút thành mili giây
+        long gio = time.getHour() * 3600 * 1000;
+        long phut = time.getMinute() * 60 * 1000;
+
+        // Tổng hợp ngày và giờ thành một giá trị timestamp
+        long timestamp = date.getTime() + gio + phut;
+
+        // Tạo một đối tượng Date mới từ timestamp
+        return new Date(timestamp);
     }
 
     @Override
