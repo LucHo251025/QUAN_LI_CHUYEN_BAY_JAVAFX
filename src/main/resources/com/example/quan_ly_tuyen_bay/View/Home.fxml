@@ -68,6 +68,36 @@
                   <Image url="@../Image/user.png" />
                </image>
             </ImageView>
+          <ImageView fitHeight="33.0" fitWidth="26.0" layoutX="31.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../Image/nhanvien.png" />
+              </image>
+          </ImageView>
+          <ImageView fitHeight="33.0" fitWidth="26.0" layoutX="31.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../Image/duongbay.png" />
+              </image>
+          </ImageView>
+          <ImageView fitHeight="33.0" fitWidth="26.0" layoutX="32.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../Image/maybayy.png" />
+              </image>
+          </ImageView>
+          <ImageView fitHeight="27.0" fitWidth="50.0" layoutX="31.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../Image/duongb.png" />
+              </image>
+          </ImageView>
+          <ImageView fitHeight="33.0" fitWidth="26.0" layoutX="32.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../Image/sanbay.png" />
+              </image>
+          </ImageView>
+          <ImageView fitHeight="33.0" fitWidth="26.0" layoutX="32.0" layoutY="555.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../Image/thongke.png" />
+              </image>
+          </ImageView>
       </children>
     </AnchorPane>
     <AnchorPane layoutX="200.0" prefHeight="646.0" prefWidth="632.0" styleClass="white-bg" stylesheets="@../Design/Style.css">
@@ -121,13 +151,19 @@
             <Font name="Arial Bold" size="14.0" />
           </font>
         </Label>
-        <Button fx:id="bt_timkiem" layoutX="452.0" layoutY="459.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="90.0" stylesheets="@../Design/Style.css" text="Tìm kiếm">
+        <Button fx:id="bt_timkiem" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="456.0" layoutY="459.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="121.0" stylesheets="@../Design/Style.css" text="Tìm kiếm">
           <styleClass>
             <String fx:value="shadow" />
             <String fx:value="radius" />
             <String fx:value="btn" />
           </styleClass>
         </Button>
+          <ImageView fitHeight="33.0" fitWidth="26.0" layoutX="472.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../Image/tk.png" />
+              </image>
+          </ImageView>
+
       </children>
     </AnchorPane>
   </children>

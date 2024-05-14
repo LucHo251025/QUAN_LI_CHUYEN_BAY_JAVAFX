@@ -114,7 +114,7 @@ public class InsertData {
             }
         }
         public static boolean inserNhanVien(NhanVien nv){
-            String sqlCommand ="inser into nhanvien values(?,?,?)";
+            String sqlCommand ="insert into nhanvien values(?,?,?)";
             try {
                 DataConnection.createStatement();
                 PreparedStatement ps=DataConnection.connection.prepareStatement(sqlCommand);
