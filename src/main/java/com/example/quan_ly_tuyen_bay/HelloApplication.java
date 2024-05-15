@@ -20,7 +20,8 @@ public class HelloApplication extends Application {
 //        fxmlLoader.setRoot(root);
 
         Scene scene = new Scene(fxmlLoader.load(), 937, 562);
-        stage.setTitle("Hello!");
+        stage.setTitle("Đăng Nhập");
+
         stage.setScene(scene);
         stage.show();
     }

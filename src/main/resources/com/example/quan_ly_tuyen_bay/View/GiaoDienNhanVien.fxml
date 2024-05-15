@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="842.0" styleClass="white-bg" stylesheets="@../Design/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.quan_ly_tuyen_bay.Controller.NhanVienController">
+   <children>
+      <Button layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#EXIT" prefHeight="32.0" prefWidth="73.0" styleClass="nav-btn" stylesheets="@../Design/Style.css" />
+      <ImageView fitHeight="32.0" fitWidth="70.0" layoutX="35.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/thoat.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="353.0" layoutY="23.0" prefHeight="39.0" prefWidth="192.0" text="Quản lí nhân viên">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tb_View" layoutX="14.0" layoutY="96.0" onMouseClicked="#clickTable" prefHeight="347.0" prefWidth="435.0">
+        <columns>
+          <TableColumn fx:id="tb_tenNhanVien" prefWidth="110.66668224334717" text="Tên nhân viên" />
+          <TableColumn fx:id="tb_sdt" prefWidth="97.99996948242188" text="SĐT" />
+            <TableColumn fx:id="tb_tenDangNhap" prefWidth="104.00001525878906" text="Tên đăng nhập" />
+            <TableColumn fx:id="tb_luong" prefWidth="122.66668701171875" text="Lương" />
+        </columns>
+      </TableView>
+      <Button fx:id="btn_them" layoutX="518.0" layoutY="96.0" mnemonicParsing="false" onAction="#ADD" prefHeight="32.0" prefWidth="73.0" stylesheets="@../Design/Style.css" text="Thêm">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="shadow" />
+         </styleClass></Button>
+      <Button fx:id="btn_sua" layoutX="624.0" layoutY="96.0" mnemonicParsing="false" onAction="#EDIT" prefHeight="32.0" prefWidth="73.0" stylesheets="@../Design/Style.css" text="Sửa ">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="shadow" />
+         </styleClass></Button>
+      <Button fx:id="btn_xoa" layoutX="723.0" layoutY="96.0" mnemonicParsing="false" onAction="#DELETE" prefHeight="32.0" prefWidth="73.0" stylesheets="@../Design/Style.css" text="Xóa">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="shadow" />
+         </styleClass></Button>
+      <Label layoutX="484.0" layoutY="158.0" prefHeight="25.0" prefWidth="105.0" text="Tên nhân viên">
+         <font>
+            <Font name="Arial Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txt_tenNV" layoutX="614.0" layoutY="155.0" prefHeight="32.0" prefWidth="192.0" stylesheets="@../Design/Style.css">
+         <styleClass>
+            <String fx:value="radius" />
+            <String fx:value="shadow" />
+         </styleClass>
+      </TextField>
+      <Label layoutX="486.0" layoutY="218.0" prefHeight="25.0" prefWidth="105.0" text="SĐT">
+         <font>
+            <Font name="Arial Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txt_sdt" layoutX="616.0" layoutY="215.0" prefHeight="32.0" prefWidth="192.0" stylesheets="@../Design/Style.css">
+         <styleClass>
+            <String fx:value="radius" />
+            <String fx:value="shadow" />
+         </styleClass>
+      </TextField>
+      <Label layoutX="486.0" layoutY="273.0" prefHeight="25.0" prefWidth="105.0" text="Tên đăng nhập">
+         <font>
+            <Font name="Arial Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txt_tenDN" layoutX="616.0" layoutY="270.0" prefHeight="32.0" prefWidth="192.0" stylesheets="@../Design/Style.css">
+         <styleClass>
+            <String fx:value="radius" />
+            <String fx:value="shadow" />
+         </styleClass>
+      </TextField>
+      <Label layoutX="486.0" layoutY="328.0" prefHeight="25.0" prefWidth="105.0" text="Lương">
+         <font>
+            <Font name="Arial Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txt_luong" layoutX="616.0" layoutY="325.0" prefHeight="32.0" prefWidth="192.0" stylesheets="@../Design/Style.css">
+         <styleClass>
+            <String fx:value="radius" />
+            <String fx:value="shadow" />
+         </styleClass>
+      </TextField>
+      <Button fx:id="btn_luu" layoutX="551.0" layoutY="393.0" mnemonicParsing="false" onAction="#SAVE" prefHeight="32.0" prefWidth="73.0" stylesheets="@../Design/Style.css" text="Lưu">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="shadow" />
+         </styleClass></Button>
+      <Button fx:id="btn_huy" layoutX="683.0" layoutY="393.0" mnemonicParsing="false" onAction="#CANCEL" prefHeight="32.0" prefWidth="73.0" stylesheets="@../Design/Style.css" text="Hủy">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="shadow" />
+         </styleClass></Button>
+   </children>
+</AnchorPane>

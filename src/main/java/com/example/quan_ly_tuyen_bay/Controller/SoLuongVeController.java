@@ -30,11 +30,12 @@ public class SoLuongVeController implements Initializable {
 
     @FXML
     void NEXT(ActionEvent event) {
+
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
 
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/GiaoDienChonSoLuongVe.fxml")));
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/GiaoDienDSVe.fxml")));
             stage.setScene(scene);
             stage.show();
 
@@ -53,6 +54,7 @@ public class SoLuongVeController implements Initializable {
             int sove = soNguoiLon + soTreEm;
             Controller.soLuongVeChon = sove;
         }
+
 
 
         Node node = (Node) event.getSource();
@@ -79,4 +81,6 @@ public class SoLuongVeController implements Initializable {
             cb_treem.getItems().add(String.valueOf(i));
         }
     }
+
+
 }

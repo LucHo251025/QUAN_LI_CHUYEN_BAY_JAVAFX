@@ -4,6 +4,7 @@ import com.example.quan_ly_tuyen_bay.Model.SanBay;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,6 +63,68 @@ public class DeleteData {
         }catch (Exception e){
             e.printStackTrace();
         }
+        return false;
+    }
+
+
+    public static boolean deleteVe(String maCB,String MaGhe){
+        String sqlCommand = "DELETE FROM VE WHERE MACB=? AND MAGHE=?";
+
+        try {
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+
+            ps.setString(1,maCB);
+            ps.setString(2,MaGhe);
+
+            if(ps.executeUpdate() > 0){
+                System.out.println("Hủy vé thành công");
+                return true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static boolean deleteNhanVien(String sdt){
+        String sqlCommand = "DELETE FROM NHANVIEN WHERE SDT=?";
+
+        try {
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+
+            ps.setString(1,sdt);
+
+            if (ps.executeUpdate() > 0) {
+                System.out.println("Xóa nhân viên thành công");
+                return true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static boolean deleteTaiKhoan(String tenDN){
+        String sqlCommand = "DELETE FROM TAIKHOAN WHERE TENDANGNHAP=?";
+
+        try {
+             DataConnection.createStatement();
+             PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+
+             ps.setString(1,tenDN);
+
+            if (ps.executeUpdate() > 0) {
+                System.out.println("Xóa tài khoản thành công");
+                return true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         return false;
     }
 }

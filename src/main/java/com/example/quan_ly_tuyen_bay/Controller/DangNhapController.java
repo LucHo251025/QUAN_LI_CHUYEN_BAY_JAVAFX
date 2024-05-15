@@ -78,6 +78,7 @@ public class DangNhapController implements Initializable {
             if(tk.getMatKhau().equals(pass)){
                 Controller.tk=tk;
 
+                System.out.println(tk.toString());
                     Node node = (Node) event.getSource();
                     Stage stage = (Stage) node.getScene().getWindow();
 

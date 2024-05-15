@@ -111,7 +111,7 @@ public class DangKyController {
 
 
                 TaiKhoan tk =new TaiKhoan(txt_tendn.getText(),txt_mk.getText(),loaiTaiKhoan);
-                NhanVien nv= new NhanVien(txt_sdt.getText(), txt_tendn.getText(),txt_hoten.getText());
+                NhanVien nv= new NhanVien(txt_sdt.getText(), txt_tendn.getText(),txt_hoten.getText(),0);
 
                 InsertData.inserTaiKhoan(tk);
                 InsertData.inserNhanVien(nv);

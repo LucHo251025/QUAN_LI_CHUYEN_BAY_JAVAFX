@@ -100,12 +100,32 @@ public class ChuyenBay {
         for (DuongBay db : Controller.duongBayArrayList) {
             if (db.getMaDuongBay().equals(maDuongBay)) {
 
-                System.out.println("Đã tìm thấy chuyến bây"+db.getMaSanBayDen());
+                System.out.println("Đã tìm thấy chuyến bây "+db.getMaDuongBay());
                 return db;
             }
         }
 
         return null;
+    }
+
+    public int getGia(){
+        for (DuongBay db : Controller.duongBayArrayList){
+            if(db.getMaDuongBay().equals(duongBay.getMaDuongBay())){
+                if(db.getKhoangCach() >=500 && db.getKhoangCach() < 850){
+                    return 2250000;
+                }else if(db.getKhoangCach() >=850 && db.getKhoangCach() < 1000){
+                    return 2790000;
+                }else if(db.getKhoangCach() >=1000 && db.getKhoangCach() < 1280){
+                    return 3400000;
+                }else if(db.getKhoangCach() >=1280){
+                    return 4000000;
+                }else {
+                    return 1000000;
+                }
+            }
+        }
+
+        return  -1;
     }
 
     public int getSoGhe() {

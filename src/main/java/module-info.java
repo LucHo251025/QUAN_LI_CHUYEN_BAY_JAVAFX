@@ -19,6 +19,7 @@ module com.example.quan_ly_tuyen_bay {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires java.desktop;
 
 
     opens com.example.quan_ly_tuyen_bay to javafx.fxml;

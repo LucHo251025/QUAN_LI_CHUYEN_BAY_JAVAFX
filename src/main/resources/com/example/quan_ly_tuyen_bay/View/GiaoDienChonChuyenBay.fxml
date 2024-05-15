@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="465.0" prefWidth="683.0" styleClass="white-bg" stylesheets="@../Design/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.quan_ly_tuyen_bay.Controller.ChonChuyenBayController">
+   <children>
+      <TableView fx:id="tb_View" layoutX="25.0" layoutY="94.0" onMouseClicked="#clickTable" prefHeight="337.0" prefWidth="631.0" stylesheets="@../Design/Style.css">
+        <columns>
+          <TableColumn fx:id="tb_machuyenbay" prefWidth="140.00002479553223" text="Mã chuyến bay" />
+          <TableColumn fx:id="tb_maybay" prefWidth="146.6666717529297" text="Máy bay" />
+            <TableColumn fx:id="tb_duongbay" minWidth="0.0" prefWidth="167.33331298828125" text="Đường bay" />
+            <TableColumn fx:id="tb_thoigian" prefWidth="175.99996948242188" text="Thời gian" />
+        </columns>
+         <styleClass>
+            <String fx:value="table-column" />
+            <String fx:value="table-view" />
+         </styleClass>
+      </TableView>
+      <Button fx:id="btn_thoat" layoutX="-1.0" mnemonicParsing="false" onAction="#EXIT" prefHeight="35.0" prefWidth="79.0" styleClass="nav-btn" stylesheets="@../Design/Style.css" />
+      <ImageView fitHeight="35.0" fitWidth="37.0" layoutX="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/thoat.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="198.0" layoutY="32.0" prefHeight="35.0" prefWidth="286.0" text="Chọn chuyến bay">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

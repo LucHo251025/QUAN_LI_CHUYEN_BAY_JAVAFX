@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class InsertData {
@@ -77,7 +78,7 @@ public class InsertData {
 
     public static boolean insertChuyenBay(ChuyenBay cb){
         String sqlCommand = "INSERT INTO CHUYENBAY VALUES(?,?,?,?,?,?)";
-
+        System.out.println(cb.toString());
         try {
             DataConnection.createStatement();
             PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
@@ -114,13 +115,14 @@ public class InsertData {
             }
         }
         public static boolean inserNhanVien(NhanVien nv){
-            String sqlCommand ="inser into nhanvien values(?,?,?)";
+            String sqlCommand ="insert into nhanvien values(?,?,?,?)";
             try {
                 DataConnection.createStatement();
                 PreparedStatement ps=DataConnection.connection.prepareStatement(sqlCommand);
                 ps.setString(1,nv.getSdt());
                 ps.setString(2, nv.getTendn());
-                ps.setString(3, nv.getTenKhachHang());
+                ps.setString(3, nv.getTenNhanVien());
+                ps.setInt(4,nv.getLuong());
                 if(ps.executeUpdate()>0){
                     System.out.println("thêm nhân viên thành công");
                     return true;
@@ -130,6 +132,33 @@ public class InsertData {
             }
             System.out.println("thêm khách hàng thất bại ");
             return false;
+        }
+
+        public static void  insertVe(ArrayList<Ve> dsVe){
+            String sqlCommand ="INSERT INTO VE VALUES(?,?,?,?,?,?,?,?)";
+
+            try {
+                for (Ve ve : dsVe){
+                    DataConnection.createStatement();
+                    PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+
+                    ps.setString(1,ve.getMaChuyenBay());
+                    ps.setString(2,ve.getTenHanhKhach());
+                    ps.setString(3,ve.getsDT());
+                    ps.setString(4,ve.getMaGhe());
+                    ps.setInt(5,ve.getGia());
+                    ps.setDate(6, (Date) ve.getNgaysinh());
+                    ps.setString(7,ve.getEmail());
+                    ps.setString(8,ve.getCccd());
+
+                    if(ps.executeUpdate() > 0){
+                        System.out.println("Thêm vé thành công");
+                    }
+
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
     }

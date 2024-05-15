@@ -3,6 +3,7 @@ package com.example.quan_ly_tuyen_bay.Connection;
 
 import com.example.quan_ly_tuyen_bay.Controller.Controller;
 import com.example.quan_ly_tuyen_bay.Model.*;
+import javafx.scene.control.cell.ComboBoxTreeCell;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,6 +65,7 @@ public class LoadData {
                         rs.getString(3).trim(),
                         rs.getInt(4)
                 );
+
                 Controller.duongBayArrayList.add(duongBay);
             }
         }catch (Exception e){
@@ -99,8 +101,6 @@ public class LoadData {
                     }
                 }
 
-                System.out.println(cb.toString());
-
                 Controller.chuyenBayArrayList.add(cb);
 
             }
@@ -121,7 +121,11 @@ public class LoadData {
                         rs.getString(1).trim(),
                         rs.getString(2).trim(),
                         rs.getString(3).trim(),
-                        rs.getString(4).trim()
+                        rs.getString(4).trim(),
+                        rs.getInt(5),
+                        rs.getDate(6),
+                        rs.getString(7).trim(),
+                        rs.getString(8)
                 );
 
                 veArrayList.add(ve);
@@ -151,15 +155,36 @@ public class LoadData {
         }
     }
 
+    public static void loadTableNhanVien(){
+        Controller.nhanVienArrayList.clear();
+        ResultSet rs = DataConnection.retrieveData("SELECT * FROM NHANVIEN");
+
+        try {
+            while (rs.next()){
+                NhanVien nv = new NhanVien(
+                        rs.getString(1).trim(),
+                        rs.getString(2).trim(),
+                        rs.getString(3).trim(),
+                        rs.getInt(4)
+                );
+
+                Controller.nhanVienArrayList.add(nv);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     public LoadData() {
-        Controller.duongBayArrayList.removeAll(Controller.duongBayArrayList);
-        Controller.sanBayArrayList.removeAll(Controller.sanBayArrayList);
-        Controller.mayBayArrayList.removeAll(Controller.mayBayArrayList);
-        Controller.chuyenBayArrayList.removeAll(Controller.chuyenBayArrayList);
+        Controller.duongBayArrayList.clear();
+        Controller.sanBayArrayList.clear();
+        Controller.mayBayArrayList.clear();
+        Controller.chuyenBayArrayList.clear();
+        Controller.nhanVienArrayList.clear();
 
         loadTableDuongBay();
         loadTableSanBay();
         loadTableMayBay();
         loadTableChuyenBay();
+        loadTableNhanVien();
     }
 }
