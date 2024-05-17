@@ -28,9 +28,9 @@
       </Label>
       <TableView fx:id="home_tbview" layoutX="14.0" layoutY="126.0" onMouseClicked="#click" prefHeight="421.0" prefWidth="508.0" styleClass="shadow" stylesheets="@../Design/Style.css">
         <columns>
-          <TableColumn fx:id="tb_machuyenbay" prefWidth="151.3333740234375" text="Mã Chuyến Bay" />
+          <TableColumn fx:id="tb_machuyenbay" prefWidth="151.3333740234375" text="Mã Chuyến Bay ✈" />
           <TableColumn fx:id="tb_shmb" prefWidth="95.33335876464844" text="SHMB" />
-            <TableColumn fx:id="tb_duongbay" prefWidth="140.0" text="Đường Bay" />
+            <TableColumn fx:id="tb_duongbay" prefWidth="140.0" text="Đường Bay ✈" />
             <TableColumn fx:id="tb_thoigian" prefWidth="118.66665649414062" text="Ngày bay" />
         </columns>
       </TableView>
@@ -100,22 +100,22 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="563.0" layoutY="190.0" prefHeight="33.0" prefWidth="95.0" text="SHMB">
+      <Label layoutX="563.0" layoutY="190.0" prefHeight="33.0" prefWidth="95.0" text="SHMB">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="563.0" layoutY="247.0" prefHeight="33.0" prefWidth="95.0" text="Đường bay">
+      <Label layoutX="563.0" layoutY="247.0" prefHeight="33.0" prefWidth="95.0" text="Đường bay">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="563.0" layoutY="313.0" prefHeight="33.0" prefWidth="95.0" text="Ngày bay">
+      <Label layoutX="563.0" layoutY="313.0" prefHeight="33.0" prefWidth="95.0" text="Ngày bay">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="563.0" layoutY="376.0" prefHeight="33.0" prefWidth="95.0" text="Thời gian">
+      <Label layoutX="563.0" layoutY="376.0" prefHeight="33.0" prefWidth="95.0" text="Thời gian">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
@@ -149,8 +149,33 @@
             <Image url="@../Image/thoat.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="646.0" layoutY="317.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/day.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="646.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/time.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="646.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/duongbay.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="646.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/maybay.png" />
+         </image>
+      </ImageView>
       <ComboBox fx:id="cb_shmb" layoutX="696.0" layoutY="190.0" prefHeight="33.0" prefWidth="209.0" stylesheets="@../Design/Style.css" />
       <ComboBox fx:id="cb_duongbay" layoutX="694.0" layoutY="247.0" prefHeight="33.0" prefWidth="209.0" stylesheets="@../Design/Style.css" />
+      <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="167.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/day.png" />
+         </image>
+      </ImageView>
    </children>
    <styleClass>
       <String fx:value="white-bg" />

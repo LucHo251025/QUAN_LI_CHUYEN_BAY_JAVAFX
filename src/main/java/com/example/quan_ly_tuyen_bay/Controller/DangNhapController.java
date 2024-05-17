@@ -10,7 +10,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,7 +38,7 @@ public class DangNhapController implements Initializable {
     private Label lbl;
 
     @FXML
-    private TextField textmk;
+    private PasswordField textmk;
 
     @FXML
     private TextField textten;
@@ -52,8 +55,8 @@ public class DangNhapController implements Initializable {
             stage.setScene(scene);
             stage.show();
 
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -87,8 +90,8 @@ public class DangNhapController implements Initializable {
                         stage.setScene(scene);
                         stage.show();
 
-                    } catch (IOException e) {
-                        System.err.println(e.getMessage());
+                    }  catch (Exception e) {
+                        e.printStackTrace();
                     }
 
             }else {
@@ -96,6 +99,38 @@ public class DangNhapController implements Initializable {
             }
         }
     }
+    @FXML
+    void handleHienMK(ActionEvent event) {
+        if (hienmk.isSelected()) {
+            String password = textmk.getText();
+            // Change PasswordField to TextField
+            TextField textField = new TextField(password);
+            textField.setLayoutX(textmk.getLayoutX());
+            textField.setLayoutY(textmk.getLayoutY());
+            textField.setPrefWidth(textmk.getPrefWidth());
+            textField.setPrefHeight(textmk.getPrefHeight());
+            textField.setStyle(textmk.getStyle());
+            // Replace PasswordField with TextField
+            AnchorPane parent = (AnchorPane) textmk.getParent();
+            parent.getChildren().remove(textmk);
+            parent.getChildren().add(textField);
+        } else {
+            String password = textmk.getText();
+            // Change TextField back to PasswordField
+            PasswordField passwordField = new PasswordField();
+            passwordField.setText(password);
+            passwordField.setLayoutX(textmk.getLayoutX());
+            passwordField.setLayoutY(textmk.getLayoutY());
+            passwordField.setPrefWidth(textmk.getPrefWidth());
+            passwordField.setPrefHeight(textmk.getPrefHeight());
+            passwordField.setStyle(textmk.getStyle());
+            // Replace TextField with PasswordField
+            AnchorPane parent = (AnchorPane) textmk.getParent();
+            parent.getChildren().remove(textmk);
+            parent.getChildren().add(passwordField);
+        }
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

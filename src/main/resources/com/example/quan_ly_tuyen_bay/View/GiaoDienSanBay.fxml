@@ -25,19 +25,19 @@
                 <TableColumn fx:id="tb_diaDiem" prefWidth="110.66668701171875" text="Địa điểm" />
             </columns>
         </TableView>
-        <Button fx:id="btn_them" layoutX="432.0" layoutY="63.0" mnemonicParsing="false" onAction="#ADD" prefHeight="31.0" prefWidth="69.0" stylesheets="@../Design/Style.css" text="Thêm">
+        <Button fx:id="btn_them" alignment="CENTER_RIGHT" layoutX="432.0" layoutY="63.0" mnemonicParsing="false" onAction="#ADD" prefHeight="31.0" prefWidth="69.0" stylesheets="@../Design/Style.css" text="Thêm">
             <styleClass>
                 <String fx:value="btn1" />
                 <String fx:value="shadow" />
             </styleClass>
         </Button>
-        <Button fx:id="btn_sua" layoutX="542.0" layoutY="63.0" mnemonicParsing="false" onAction="#EDIT" prefHeight="31.0" prefWidth="69.0" stylesheets="@../Design/Style.css" text="Sửa">
+        <Button fx:id="btn_sua" alignment="CENTER_RIGHT" layoutX="542.0" layoutY="63.0" mnemonicParsing="false" onAction="#EDIT" prefHeight="31.0" prefWidth="69.0" stylesheets="@../Design/Style.css" text="Sửa">
             <styleClass>
                 <String fx:value="btn1" />
                 <String fx:value="shadow" />
             </styleClass>
         </Button>
-        <Button fx:id="btn_xoa" layoutX="648.0" layoutY="63.0" mnemonicParsing="false" onAction="#DELETE" prefHeight="31.0" prefWidth="69.0" stylesheets="@../Design/Style.css" text="Xóa">
+        <Button fx:id="btn_xoa" alignment="CENTER_RIGHT" layoutX="648.0" layoutY="63.0" mnemonicParsing="false" onAction="#DELETE" prefHeight="31.0" prefWidth="69.0" stylesheets="@../Design/Style.css" text="Xóa">
             <styleClass>
                 <String fx:value="btn1" />
                 <String fx:value="shadow" />
@@ -89,6 +89,21 @@
         <ImageView fitHeight="31.0" fitWidth="43.0" layoutX="20.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../Image/thoat.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="25.0" fitWidth="31.0" layoutX="648.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Image/xoa.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="31.0" fitWidth="69.0" layoutX="546.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Image/sua.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="432.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Image/them.png" />
             </image>
         </ImageView>
     </children>

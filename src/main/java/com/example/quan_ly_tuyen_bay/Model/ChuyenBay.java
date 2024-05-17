@@ -20,11 +20,16 @@ public class ChuyenBay {
     private Date ngayBay;
     private LocalTime gioBay;
     private int trangThai;
+    private int tongTien;
     private ArrayList<Ve> veArrayList = new ArrayList<Ve>();
 
     public ChuyenBay() {
 
     }
+
+
+
+
 
     public ChuyenBay(String maChuyenBay, String SHMB, DuongBay duongBay, Date ngayBay, LocalTime gioBay, int trangThai) {
         this.maChuyenBay = maChuyenBay;
@@ -33,10 +38,22 @@ public class ChuyenBay {
         this.ngayBay = ngayBay;
         this.gioBay = gioBay;
         this.trangThai = trangThai;
+        this.tongTien=getTongTien();
     }
 
 
+    public int getTongTien() {
+        int tongTien=0;
+        for (Ve ve : getVeArrayList()){
+           tongTien+=ve.getGia();
+        }
 
+        return tongTien;
+    }
+
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
+    }
 
     public String getMaChuyenBay() {
         return maChuyenBay;

@@ -202,8 +202,8 @@ public class HomeController implements Initializable {
             stage.setScene(scene);
             stage.show();
 
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        }  catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -217,8 +217,8 @@ public class HomeController implements Initializable {
             stage.setScene(scene);
             stage.show();
 
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        }  catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -232,8 +232,8 @@ public class HomeController implements Initializable {
             stage.setScene(scene);
             stage.show();
 
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        }  catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -247,8 +247,8 @@ public class HomeController implements Initializable {
             stage.setScene(scene);
             stage.show();
 
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        }  catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -290,8 +290,8 @@ public class HomeController implements Initializable {
             stage.setScene(scene);
             stage.show();
 
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        }  catch (Exception e) {
+            e.printStackTrace();
         }
     }
     @FXML
@@ -305,14 +305,24 @@ public class HomeController implements Initializable {
             stage.setScene(scene);
             stage.show();
 
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        } catch (Exception e) {
+           e.printStackTrace();
         }
     }
 
     @FXML
     void thongKe(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
 
+        try {
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/GiaoDienThongKe.fxml")));
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -325,8 +335,8 @@ public class HomeController implements Initializable {
             stage.setScene(scene);
             stage.show();
 
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        }  catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

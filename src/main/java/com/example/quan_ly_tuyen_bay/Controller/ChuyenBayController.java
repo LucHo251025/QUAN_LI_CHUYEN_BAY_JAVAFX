@@ -326,8 +326,8 @@ public class ChuyenBayController implements Initializable {
             stage.setTitle("Chọn số lượng vé");
             stage.show();
 
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        }  catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -413,8 +413,8 @@ public class ChuyenBayController implements Initializable {
             stage.setTitle("Home");
             stage.show();
 
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        }  catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
