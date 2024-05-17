@@ -125,8 +125,14 @@ public class DangNhapController implements Initializable {
             passwordField.setStyle(textmk.getStyle());
             // Replace TextField with PasswordField
             AnchorPane parent = (AnchorPane) textmk.getParent();
+            if (parent == null) {
+                System.out.println("Parent is null");
+                // Initialize parent or handle the null case appropriately
+                return;
+            }
             parent.getChildren().remove(textmk);
             parent.getChildren().add(passwordField);
+            parent.getChildren().clear();
         }
     }
 
