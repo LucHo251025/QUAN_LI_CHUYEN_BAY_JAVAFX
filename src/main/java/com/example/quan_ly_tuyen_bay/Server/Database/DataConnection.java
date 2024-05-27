@@ -1,4 +1,4 @@
-package com.example.quan_ly_tuyen_bay.Connection;
+package com.example.quan_ly_tuyen_bay.Server.Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -30,6 +30,7 @@ public class DataConnection {
         String user = "root";
         String pass = "";
         try {
+
 //            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url,user,pass);
             statement = connection.createStatement();

@@ -1,9 +1,12 @@
 package com.example.quan_ly_tuyen_bay.Model;
+
+import java.io.Serializable;
+
 /**
  *
  * @author conghau
  */
-public class TaiKhoan {
+public class TaiKhoan implements Serializable {
 
     private String tenDangNhap;
     private String matKhau;

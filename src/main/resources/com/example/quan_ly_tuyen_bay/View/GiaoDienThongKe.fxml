@@ -68,14 +68,14 @@
                </font></Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="27.0" layoutY="190.0" prefHeight="348.0" prefWidth="744.0" stylesheets="@../Design/Style.css">
+      <AnchorPane layoutX="29.0" layoutY="192.0" prefHeight="348.0" prefWidth="744.0" stylesheets="@../Design/Style.css">
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="shadow" />
             <String fx:value="shadow" />
          </styleClass>
          <children>
-            <TableView fx:id="tb_View" layoutX="8.0" layoutY="12.0" prefHeight="323.0" prefWidth="516.0">
+            <TableView fx:id="tb_View" layoutX="8.0" layoutY="12.0" onMouseClicked="#click" prefHeight="323.0" prefWidth="516.0">
               <columns>
                 <TableColumn fx:id="tb_mcb" prefWidth="112.00002670288086" text="Mã chuyến bay" />
                 <TableColumn fx:id="tb_shmb" prefWidth="96.6666259765625" text="SHMB" />
@@ -83,7 +83,20 @@
                   <TableColumn fx:id="tb_tongtien" prefWidth="162.00003051757812" text="Tổng tiền" />
               </columns>
             </TableView>
-            <Button fx:id="btn_thongke" layoutX="557.0" layoutY="155.0" mnemonicParsing="false" onAction="#Print" prefHeight="40.0" prefWidth="153.0" text="In thống kê">
+            <Button fx:id="btn_thongke" layoutX="557.0" layoutY="154.0" mnemonicParsing="false" onAction="#Print" prefHeight="40.0" prefWidth="153.0" text="In thống kê">
+               <stylesheets>
+                  <URL value="@../Design/Style.css" />
+               </stylesheets>
+               <styleClass>
+                  <String fx:value="btn1" />
+                  <String fx:value="shadow" />
+                  <String fx:value="radius" />
+               </styleClass>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_Thoat" layoutX="557.0" layoutY="241.0" mnemonicParsing="false" onAction="#Exit" prefHeight="40.0" prefWidth="153.0" text="Thoát">
                <stylesheets>
                   <URL value="@../Design/Style.css" />
                </stylesheets>

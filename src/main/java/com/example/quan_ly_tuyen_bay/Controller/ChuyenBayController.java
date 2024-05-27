@@ -7,6 +7,7 @@ import com.example.quan_ly_tuyen_bay.Connection.UpdateData;
 import com.example.quan_ly_tuyen_bay.Model.ChuyenBay;
 import com.example.quan_ly_tuyen_bay.Model.DuongBay;
 import com.example.quan_ly_tuyen_bay.Model.MayBay;
+import com.example.quan_ly_tuyen_bay.Server.Repository.DuongBayRepo;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -36,6 +37,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class ChuyenBayController implements Initializable {
+
+    private static ChuyenBayController instance;
+
+    public static ChuyenBayController getInstance() {
+        return instance;
+    }
+
+    public ChuyenBayController() {
+        instance = this;
+    }
 
     @FXML
     private Button bt_huy;
@@ -104,25 +115,24 @@ public class ChuyenBayController implements Initializable {
     private int cheDo;
     private ObservableList<ChuyenBay> observableList;
     private Alert alert;
+    private List<ChuyenBay> list = new ArrayList<ChuyenBay>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        new LoadData();
-        LoadData.loadTableMayBay();
-        LoadData.loadTableDuongBay();
-        LoadData.loadTableChuyenBay();
-
-        cheDo=0;
-
         showData();
+//        LoadData.loadTableDuongBay();
+        for (DuongBay db : Controller.duongBayArrayList) {
+            cb_duongbay.getItems().add(db.getMaSanBayDi() + "->" + db.getMaSanBayDen());
+        }
 
-        for(MayBay mb : Controller.mayBayArrayList){
+        cheDo = 0;
+
+
+
+
+        for (MayBay mb : Controller.mayBayArrayList) {
             cb_shmb.getItems().add(mb.getSHMB().trim());
         }
-        for(DuongBay db : Controller.duongBayArrayList){
-            cb_duongbay.getItems().add(db.getMaSanBayDi()+"->"+db.getMaSanBayDen());
-        }
-
 
         for (int i = 0; i <= 23; i++) {
             String hour;
@@ -163,68 +173,77 @@ public class ChuyenBayController implements Initializable {
         radio_hoantat.setSelected(false);
         radio_het.setSelected(false);
         radio_con.setSelected(false);
+
+
     }
-    public void showData(){
-       new LoadData();
-        ArrayList<ChuyenBay> list =new ArrayList<>();
-        for (ChuyenBay cb : Controller.chuyenBayArrayList){
-            if(cb.getTrangThai() == this.cheDo){
+    public void showData() {
+        LoadData.loadTableDuongBay();
+        LoadData.loadTableChuyenBay();
+        LoadData.loadTableMayBay();
+        LoadData.loadTableSanBay();
+
+        list.clear();
+        for (ChuyenBay cb : Controller.chuyenBayArrayList) {
+            if (cb.getTrangThai() == this.cheDo) {
                 list.add(cb);
             }
         }
         tb_machuyenbay.setCellValueFactory(new PropertyValueFactory<>("maChuyenBay"));
         tb_shmb.setCellValueFactory(new PropertyValueFactory<>("SHMB"));
+
         tb_duongbay.setCellValueFactory(cellData -> {
             ChuyenBay chuyenBay = cellData.getValue();
-            DuongBay duongBay = chuyenBay.getDuongBay(); // Lấy đối tượng DuongBay từ ChuyenBay
+            DuongBay duongBay = chuyenBay.getDuongBay();
+            if (duongBay != null) {
                 return new SimpleStringProperty(duongBay.getMaSanBayDi() + "->" + duongBay.getMaSanBayDen());
+            } else {
+                return new SimpleStringProperty("Unknown");
+            }
         });
-        tb_thoigian.setCellValueFactory(cellData-> {
-            ChuyenBay chuyenBay=cellData.getValue();
-            return new SimpleStringProperty(chuyenBay.getNgayBay()+" "+chuyenBay.getGioBay());
+        tb_thoigian.setCellValueFactory(cellData -> {
+            ChuyenBay chuyenBay = cellData.getValue();
+            return new SimpleStringProperty(chuyenBay.getNgayBay() + " " + chuyenBay.getGioBay());
         });
 
-        observableList= FXCollections.observableArrayList(list);
+        observableList = FXCollections.observableArrayList(list);
         home_tbview.setItems(observableList);
+        home_tbview.refresh();
 
     }
 
 
-    public void notification(String mes){
-        alert=new Alert(Alert.AlertType.INFORMATION);
+    public void notification(String mes) {
+        alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thông báo");
         alert.setHeaderText(mes);
         alert.showAndWait();
     }
 
-    public void radioButton(ActionEvent event){
-        if(radio_con.isSelected()){
-            this.cheDo=ChuyenBay.CONVE;
+    public void radioButton(ActionEvent event) {
+        if (radio_con.isSelected()) {
+            this.cheDo = ChuyenBay.CONVE;
             showData();
             radio_huy.setSelected(false);
             radio_hoantat.setSelected(false);
             radio_het.setSelected(false);
-        }else
-        if (radio_het.isSelected()){
-            this.cheDo=ChuyenBay.HETVE;
+        } else if (radio_het.isSelected()) {
+            this.cheDo = ChuyenBay.HETVE;
             radio_huy.setSelected(false);
             radio_hoantat.setSelected(false);
             radio_con.setSelected(false);
             showData();
-        }else
-        if(radio_hoantat.isSelected()){
-            this.cheDo=ChuyenBay.HOANTAT;
+        } else if (radio_hoantat.isSelected()) {
+            this.cheDo = ChuyenBay.HOANTAT;
             radio_huy.setSelected(false);
             radio_con.setSelected(false);
             radio_het.setSelected(false);
             showData();
-        }else
-        if(radio_huy.isSelected()){
-            this.cheDo=ChuyenBay.HUYCHUYEN;
+        } else if (radio_huy.isSelected()) {
+            this.cheDo = ChuyenBay.HUYCHUYEN;
             radio_con.setSelected(false);
             radio_hoantat.setSelected(false);
             radio_het.setSelected(false);
-    showData();
+            showData();
         }
     }
 
@@ -248,12 +267,12 @@ public class ChuyenBayController implements Initializable {
 
         try {
             java.util.Date dateNow = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-         }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void clearText(){
+    public void clearText() {
         txt_machuyenbay.setText("");
         cb_shmb.setValue("");
         cb_duongbay.setValue("");
@@ -261,17 +280,18 @@ public class ChuyenBayController implements Initializable {
         cb_gio.setValue(null);
         cm_phut.setValue(null);
     }
-    public void click(){
-        ChuyenBay cb = home_tbview.getSelectionModel().getSelectedItem();
-        int num =home_tbview.getSelectionModel().getFocusedIndex();
 
-        if(num < 0){
+    public void click() {
+        ChuyenBay cb = home_tbview.getSelectionModel().getSelectedItem();
+        int num = home_tbview.getSelectionModel().getFocusedIndex();
+
+        if (num < 0) {
             return;
         }
 
         txt_machuyenbay.setText(cb.getMaChuyenBay());
         cb_shmb.setValue(cb.getSHMB());
-        cb_duongbay.setValue(cb.getDuongBay().getMaSanBayDi()+"->"+cb.getDuongBay().getMaSanBayDen());
+        cb_duongbay.setValue(cb.getDuongBay().getMaSanBayDi() + "->" + cb.getDuongBay().getMaSanBayDen());
         date_ngaybay.setValue(LocalDate.parse(String.valueOf(cb.getNgayBay())));
         int gio = cb.getGioBay().getHour();
         int phut = cb.getGioBay().getMinute();
@@ -284,6 +304,7 @@ public class ChuyenBayController implements Initializable {
         cb_gio.setValue(gioStr);
         cm_phut.setValue(phutStr);
     }
+
     @FXML
     void CANCEL(ActionEvent event) {
         clearText();
@@ -304,14 +325,14 @@ public class ChuyenBayController implements Initializable {
 
     @FXML
     void DSve(ActionEvent event) {
-        if(home_tbview.getSelectionModel().getSelectedIndex() == -1){
+        if (home_tbview.getSelectionModel().getSelectedIndex() == -1) {
             notification("Vui lòng chọn chuyến bay");
             return;
         }
 
-        for (ChuyenBay cbb : Controller.chuyenBayArrayList){
-            if(cbb.getMaChuyenBay().equals(home_tbview.getSelectionModel().getSelectedItem().getMaChuyenBay())){
-                Controller.cb=cbb;
+        for (ChuyenBay cbb : Controller.chuyenBayArrayList) {
+            if (cbb.getMaChuyenBay().equals(home_tbview.getSelectionModel().getSelectedItem().getMaChuyenBay())) {
+                Controller.cb = cbb;
 
                 break;
             }
@@ -326,7 +347,7 @@ public class ChuyenBayController implements Initializable {
             stage.setTitle("Chọn số lượng vé");
             stage.show();
 
-        }  catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -345,54 +366,78 @@ public class ChuyenBayController implements Initializable {
     void SAVE(ActionEvent event) {
         txt_machuyenbay.setText(txt_machuyenbay.getText().toUpperCase());
 
-        if(txt_machuyenbay.getText().equals("")){
+        if (txt_machuyenbay.getText().equals("")) {
             notification("Vui lòng nhập đầy đủ thông tin");
             return;
         }
 
-        LocalDate datenow=LocalDate.now();
+        LocalDate datenow = LocalDate.now();
         LocalTime myTime = LocalTime.of(
                 Integer.parseInt(cb_gio.getValue()), // Giờ được chọn từ ComboBox
                 Integer.parseInt(cm_phut.getValue()), // Phút được chọn từ ComboBox
                 0
         );
 
-         // Tạo LocalDateTime từ ngày và thời gian
+        // Tạo LocalDateTime từ ngày và thời gian
         LocalDateTime dateTime = LocalDateTime.of(date_ngaybay.getValue(), myTime);
 
         // Tính thời giân cách thời điểm hiêện tại
-         long timeDiff = dateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() - System.currentTimeMillis();
+        long timeDiff = dateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() - System.currentTimeMillis();
 
-        if((timeDiff < 24 * 3600000)){
+        if ((timeDiff < 24 * 3600000)) {
             notification("Chuyến bay phải mở trước một ngày");
             return;
         }
         java.sql.Date myDate = java.sql.Date.valueOf(date_ngaybay.getValue());
-        DuongBay myDuongBay =Controller.duongBayArrayList.get(cb_duongbay.getSelectionModel().getSelectedIndex());
+        LoadData.loadTableDuongBay();
+        DuongBay myDuongBay = null;
+        String str = cb_duongbay.getValue();
+        System.out.println(str);
+        String[] splip = str.split("->");
+        String maduongbay = splip[0].trim() + splip[1].trim();
+        System.out.println(maduongbay);
 
-        ChuyenBay cb = new ChuyenBay(txt_machuyenbay.getText(),cb_shmb.getValue(),myDuongBay,myDate,myTime,ChuyenBay.CONVE);
-        if(home_tbview.getSelectionModel().getSelectedIndex() == -1){
-            for (ChuyenBay chuyenBay : Controller.chuyenBayArrayList){
-                if(chuyenBay.getMaChuyenBay().equals(cb.getMaChuyenBay())){
+        for (DuongBay db : Controller.duongBayArrayList) {
+            if (db.getMaDuongBay().equals(maduongbay)) {
+                myDuongBay = db;
+                System.out.println("Đường Bay " + myDuongBay.getMaDuongBay());
+                break;
+            }
+        }
+
+        // Check if myDuongBay is still null after the loop
+        if (myDuongBay == null) {
+            notification("Đường bay không hợp lệ");
+            return;
+        }
+
+        ChuyenBay cb = new ChuyenBay(txt_machuyenbay.getText(), cb_shmb.getValue(), myDuongBay, myDate, myTime, ChuyenBay.CONVE);
+        if (home_tbview.getSelectionModel().getSelectedIndex() == -1) {
+
+            LoadData.loadTableChuyenBay();
+            for (ChuyenBay chuyenBay : Controller.chuyenBayArrayList) {
+                if (chuyenBay.getMaChuyenBay().equals(cb.getMaChuyenBay())) {
                     notification("Chuyến bay đã tồn tại");
                     return;
                 }
+
                 //kiểm tra chuyến bay mới có cách chuyến bay trong hệ thống 30 phút không
-                if((chuyenBay.getSHMB().equals(cb.getSHMB()) || chuyenBay.getDuongBay().equals(cb.getDuongBay()))
-                        && ( (Math.abs(chuyenBay.getCBTime().getTime() - cb.getCBTime().getTime() ) < 1800000))
-                ){
+                if ((chuyenBay.getSHMB().equals(cb.getSHMB()) || chuyenBay.getDuongBay().equals(cb.getDuongBay()))
+                        && ((Math.abs(chuyenBay.getCBTime().getTime() - cb.getCBTime().getTime()) < 1800000))) {
+
                     notification("Không thể thêm chuyến bay vào thời gian này");
                     return;
                 }
-            }
 
+            }
+            System.out.println("Chuẩn bị thêm");
             InsertData.insertChuyenBay(cb);
-        }else{
-            for (ChuyenBay chuyenBay : Controller.chuyenBayArrayList){
+        } else {
+            for (ChuyenBay chuyenBay : Controller.chuyenBayArrayList) {
                 //kiểm tra chuyến bay mới có cách chuyến bay trong hệ thống 30 phút không
-                if((chuyenBay.getSHMB().equals(cb.getSHMB()) || chuyenBay.getDuongBay().equals(cb.getDuongBay()))
-                        && ( (Math.abs(chuyenBay.getCBTime().getTime() - cb.getCBTime().getTime() ) < 1800000))
-                ){
+                if ((chuyenBay.getSHMB().equals(cb.getSHMB()) || chuyenBay.getDuongBay().equals(cb.getDuongBay()))
+                        && ((Math.abs(chuyenBay.getCBTime().getTime() - cb.getCBTime().getTime()) < 1800000))
+                ) {
                     notification("Không thể thêm chuyến bay vào thời gian này");
                     return;
                 }
@@ -400,8 +445,10 @@ public class ChuyenBayController implements Initializable {
 
             UpdateData.updateChuyenBay(cb);
         }
-        showData();
+        clearText();
+//        showData();
     }
+
     @FXML
     void Thoat(ActionEvent event) {
         Node node = (Node) event.getSource();
@@ -413,27 +460,27 @@ public class ChuyenBayController implements Initializable {
             stage.setTitle("Home");
             stage.show();
 
-        }  catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
     void cancelTrip(ActionEvent event) {
-        if(home_tbview.getSelectionModel().getSelectedIndex() == -1){
+        if (home_tbview.getSelectionModel().getSelectedIndex() == -1) {
             notification("Vui lòng chọn chuyến bay");
-        }else {
-            alert=new Alert(Alert.AlertType.CONFIRMATION);
+        } else {
+            alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Thông báo");
-            alert.setHeaderText("Bạn có chắc muốn xóa đường bay "+txt_machuyenbay.getText()+" này không ?");
+            alert.setHeaderText("Bạn có chắc muốn xóa đường bay " + txt_machuyenbay.getText() + " này không ?");
 
             Optional<ButtonType> optional = alert.showAndWait();
 
-            if(optional.get() == ButtonType.OK){
+            if (optional.get() == ButtonType.OK) {
                 UpdateData.cancelTrip(txt_machuyenbay.getText());
                 showData();
                 clearText();
-            }else if(optional.get() == ButtonType.CANCEL){
+            } else if (optional.get() == ButtonType.CANCEL) {
                 clearText();
             }
         }

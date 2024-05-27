@@ -45,9 +45,19 @@ public class DangKyController {
     @FXML
     private PasswordField txt_xacthucmk;
     private String loaiTaiKhoan;
-
-    public void notification(String mes){
-        alert=new Alert(Alert.AlertType.INFORMATION);
+    private static DangKyController instance;
+    public static DangKyController getInstance(){
+        return instance;
+    }
+    public DangKyController(){
+        instance = this;
+    }
+    public void loadClassDangKy(){
+        LoadData.loadTableTaiKhoan();
+        LoadData.loadTableNhanVien();
+    }
+    public void notification(String mes) {
+        alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thông báo");
         alert.setHeaderText(mes);
         alert.showAndWait();

@@ -4,6 +4,7 @@ package com.example.quan_ly_tuyen_bay.Controller;
 import com.example.quan_ly_tuyen_bay.Model.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
 
@@ -20,7 +21,7 @@ public class Controller {
     public static ChuyenBay cb = new ChuyenBay();
     public static int soLuongVeChon;
     public static ArrayList<String> dsGheChon = new ArrayList<>();
-    public static ArrayList<Ve> dsVeChon = new ArrayList<Ve>();
+    public static List<Ve> dsVeChon = new ArrayList<Ve>();
     public static ArrayList<ChuyenBay> timchuyenBayArrayList = new ArrayList<ChuyenBay>();
 
 

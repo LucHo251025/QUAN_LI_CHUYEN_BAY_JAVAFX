@@ -1,6 +1,7 @@
 package com.example.quan_ly_tuyen_bay.Controller;
 
 import com.example.quan_ly_tuyen_bay.Connection.DeleteData;
+import com.example.quan_ly_tuyen_bay.Connection.LoadData;
 import com.example.quan_ly_tuyen_bay.Connection.UpdateData;
 import com.example.quan_ly_tuyen_bay.Model.ChuyenBay;
 import com.example.quan_ly_tuyen_bay.Model.DuongBay;
@@ -24,8 +25,17 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DsVeController implements Initializable {
+
+//    private static DsVeController instance;
+//    public static DsVeController getInstance(){
+//        return instance;
+//    }
+//    public DsVeController(){
+//        instance = this;
+//    }
     @FXML
     private Button bt_huyve;
+
 
     @FXML
     private Label lb_title;
@@ -62,6 +72,7 @@ public class DsVeController implements Initializable {
     private ArrayList<Button> listGhe = new ArrayList<Button>();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LoadData.loadTableChuyenBay();
         txt_tenkhackhang.setDisable(true);
         txt_sdt.setDisable(true);
         txt_gia.setDisable(true);
@@ -131,8 +142,11 @@ public class DsVeController implements Initializable {
             }
         }
 
-
     }
+
+
+
+
     private  void  chonGhe(ActionEvent event,Button bt){
         if(Controller.tk.getLoaiTaiKhoan().equals("nhanvien")){
 
@@ -217,6 +231,5 @@ public class DsVeController implements Initializable {
         }
     }
 
-
-    }
+}
 

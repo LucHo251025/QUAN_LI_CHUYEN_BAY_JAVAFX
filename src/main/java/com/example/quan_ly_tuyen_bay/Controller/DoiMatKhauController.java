@@ -71,7 +71,7 @@ public class DoiMatKhauController implements Initializable {
             Optional<ButtonType> optional = alert.showAndWait();
 
             if(optional.get() == ButtonType.OK){
-                UpdateData.doiMatKhau(Controller.tk,mk_moi.getText());
+                UpdateData.doiMatKhau(Controller.tk.getTenDangNhap(),mk_moi.getText());
                 Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
 

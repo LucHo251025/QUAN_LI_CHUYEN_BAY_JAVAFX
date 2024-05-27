@@ -27,6 +27,15 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SanBayController implements Initializable {
+    private static SanBayController instance;
+
+    // Phương thức getInstance trả về tham chiếu đến controller
+    public static SanBayController getInstance() {
+        return instance;
+    }
+    public SanBayController(){
+        instance=this;
+    }
     @FXML
     private Button btn_huy;
 
@@ -165,7 +174,6 @@ public class SanBayController implements Initializable {
 
             if(optional.get() == ButtonType.OK){
                 DeleteData.deleteSanBay(txt_maSanBay.getText());
-                showData();
                 clearText();
                 txt_diaDiem.setDisable(true);
                 txt_maSanBay.setDisable(true);
@@ -206,7 +214,6 @@ public class SanBayController implements Initializable {
         }else {
             UpdateData.updateSanBay(sb);
         }
-        showData();
         clearText();
 
         txt_diaDiem.setDisable(true);

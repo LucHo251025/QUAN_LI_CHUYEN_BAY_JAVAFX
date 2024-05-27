@@ -1,10 +1,10 @@
 package com.example.quan_ly_tuyen_bay.Model;
 
-import com.example.quan_ly_tuyen_bay.Connection.DataConnection;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Ve {
+public class Ve implements Serializable {
     private String maChuyenBay;
     private String tenHanhKhach;
     private String sDT;

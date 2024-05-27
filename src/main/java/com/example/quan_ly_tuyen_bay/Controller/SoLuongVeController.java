@@ -48,11 +48,26 @@ public class SoLuongVeController implements Initializable {
     void SELECT(ActionEvent event) {
         String nguoiLonValue = cb_nguoilon.getValue();
         String treemValue = cb_treem.getValue();
-        if (nguoiLonValue != null && treemValue != null) {
+        if(nguoiLonValue != null && treemValue == null){
+            int soNguoiLon = Integer.parseInt(nguoiLonValue);
+            int soTreEm = 0;
+            int sove = soNguoiLon + soTreEm;
+            System.out.println("Số vé đã chọn "+sove);
+            Controller.soLuongVeChon = sove;
+        }else if(nguoiLonValue == null && treemValue != null){
+            int soNguoiLon = 0;
+            int soTreEm = Integer.parseInt(treemValue) ;
+            int sove = soNguoiLon + soTreEm;
+            System.out.println("Số vé đã chọn "+sove);
+            Controller.soLuongVeChon = sove;
+        }else if (nguoiLonValue != null && treemValue != null) {
             int soNguoiLon = Integer.parseInt(nguoiLonValue);
             int soTreEm = Integer.parseInt(treemValue);
             int sove = soNguoiLon + soTreEm;
+            System.out.println("Số vé đã chọn "+sove);
             Controller.soLuongVeChon = sove;
+        }else {
+            System.out.println("Giá trị bị null");
         }
 
 

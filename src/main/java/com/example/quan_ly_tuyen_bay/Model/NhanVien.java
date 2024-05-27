@@ -1,6 +1,8 @@
 package com.example.quan_ly_tuyen_bay.Model;
 
-public class NhanVien {
+import java.io.Serializable;
+
+public class NhanVien implements Serializable {
     private String sdt;
     private String tendn;
     private String tenNhanVien;

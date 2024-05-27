@@ -1,6 +1,5 @@
 package com.example.quan_ly_tuyen_bay.Controller;
 
-import com.example.quan_ly_tuyen_bay.Connection.DataConnection;
 import com.example.quan_ly_tuyen_bay.Connection.LoadData;
 import com.example.quan_ly_tuyen_bay.Model.TaiKhoan;
 import javafx.event.ActionEvent;
