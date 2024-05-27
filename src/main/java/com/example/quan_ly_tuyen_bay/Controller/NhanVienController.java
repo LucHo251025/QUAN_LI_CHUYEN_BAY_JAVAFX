@@ -25,6 +25,14 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class NhanVienController implements Initializable {
+    private static NhanVienController instance;
+    public static NhanVienController getInstance(){
+         return instance;
+    }
+
+    public NhanVienController(){
+        instance = this;
+    }
     @FXML
     private Button btn_huy;
 
@@ -69,7 +77,7 @@ public class NhanVienController implements Initializable {
     private ObservableList<NhanVien> observableList;
     private Alert alert;
 
-    private void showData(){
+    public void showData(){
         LoadData.loadTableNhanVien();
         tb_luong.setCellValueFactory(new PropertyValueFactory<>("luong"));
         tb_sdt.setCellValueFactory(new PropertyValueFactory<>("sdt"));
@@ -138,7 +146,6 @@ public class NhanVienController implements Initializable {
                 clearText();
             }
 
-            showData();
         }
 
     }
@@ -232,7 +239,6 @@ public class NhanVienController implements Initializable {
             txt_tenDN.setDisable(true);
             txt_tenNV.setDisable(true);
             clearText();
-            showData();
         }
     }
 

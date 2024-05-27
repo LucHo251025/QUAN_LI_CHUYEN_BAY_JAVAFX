@@ -5,6 +5,8 @@ import com.example.quan_ly_tuyen_bay.Controller.Controller;
 import com.example.quan_ly_tuyen_bay.Model.*;
 import javafx.scene.control.cell.ComboBoxTreeCell;
 
+import java.io.*;
+import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -12,179 +14,125 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LoadData {
-    public static void loadTableMayBay(){
-        Controller.mayBayArrayList.clear();
 
-        ResultSet rs = DataConnection.retrieveData("select * from MAYBAY");
+    private static final String ADDRESS = "localhost";
+    private static final int PORT = 20004;
+    private static Socket socket;
+
+    private static final ObjectInputStream ois;
+
+    private static final ObjectOutputStream oos;
+
+    static {
+        try {
+            socket = new Socket(ADDRESS, PORT);
+
+            ois = new ObjectInputStream(socket.getInputStream());
+            oos = new ObjectOutputStream(socket.getOutputStream());
+            oos.flush();
+
+
+            System.out.println("Đã tạo thêm kết nối 2004");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+//<T>: Đây là một kiểu tham số tổng quát.
+// Nó cho phép phương thức trả về một danh sách của bất kỳ loại nào (T).
+
+    public static <T> List<T> sendCommand(String commad) {
+        List<T> dataList = new ArrayList<>();
 
         try {
-            while (rs.next()){
-                MayBay mayBay = new MayBay(
-                        rs.getString(1).trim(),
-                        rs.getString(2).trim(),
-                        rs.getInt(3)
-                );
 
-                Controller.mayBayArrayList.add(mayBay);
+            oos.writeUTF(commad);
+            oos.flush();
+            oos.reset();
+
+            Object receivedObject = ois.readObject();
+
+            if(receivedObject instanceof List){
+                dataList = (List<T>) receivedObject;
+            }else {
+                throw new Exception("Nhận được dữ liệu không mong đợi từ máy");
             }
-        }catch (Exception e){
-            Logger.getLogger(LoadData.class.getName()).log(Level.SEVERE,"Lỗi loadData table MAYBAY",e);
+
+        } catch (Exception e) {
+            System.err.println("Lỗi giải mã dữ liệu: " + e.getMessage());
+            System.err.println("Vị trí: " + e.getStackTrace()[0]);
+            System.err.println("Nguyên nhân tiềm ẩn: Dữ liệu bị hỏng hoặc không tương thích lớp");
         }
 
+        return dataList;
+    }
+
+    public static void loadTableMayBay() {
+        Controller.mayBayArrayList.clear();
+        List<MayBay> list = sendCommand("getMayBayList");
+        Controller.mayBayArrayList.addAll(list);
     }
 
     public static void loadTableSanBay() {
         Controller.sanBayArrayList.clear();
-        ResultSet rs = DataConnection.retrieveData("select * from SANBAY");
-
-        try {
-            while (rs.next()){
-
-                SanBay sanBay =new SanBay(
-                        rs.getString(1).trim(),
-                        rs.getString(2).trim(),
-                        rs.getString(3).trim()
-                );
-
-                Controller.sanBayArrayList.add(sanBay);
-            }
-        }catch (Exception e){
-            Logger.getLogger(LoadData.class.getName()).log(Level.SEVERE,"Lỗi load Data table SANBAY");
-        }
+        List<SanBay> list = sendCommand("getSanBayList");
+        Controller.sanBayArrayList.addAll(list);
     }
+
     public static void loadTableDuongBay() {
-
         Controller.duongBayArrayList.clear();
-        ResultSet rs = DataConnection.retrieveData("select * from DUONGBAY");
+        List<DuongBay> list = sendCommand("getDuongBayList");
+            Controller.duongBayArrayList.addAll(list);
 
-        try {
-            while (rs.next()){
-                DuongBay duongBay = new DuongBay(
-                        rs.getString(1).trim(),
-                        rs.getString(2).trim(),
-                        rs.getString(3).trim(),
-                        rs.getInt(4)
-                );
-
-                Controller.duongBayArrayList.add(duongBay);
-            }
-        }catch (Exception e){
-            Logger.getLogger(LoadData.class.getName()).log(Level.SEVERE,"Lỗi load table DUONGBAY",e);
-        }
     }
 
     public static void loadTableChuyenBay() {
-
-        Controller.duongBayArrayList.clear();
-        ResultSet rs = DataConnection.retrieveData("select * from CHUYENBAY");
-
-        Date datenow = Calendar.getInstance().getTime();
-
-        try {
-            while (rs.next()){
-                ChuyenBay cb = new ChuyenBay(
-                        rs.getString(1).trim(),
-                        rs.getString(2).trim(),
-                        ChuyenBay.timDuongBay(rs.getString(3).trim()),
-                        rs.getDate(4),
-                        rs.getTime(5).toLocalTime(),
-                        rs.getInt(6)
-                );
-
-
-                cb.setVeArrayList(loadTableVe(cb.getMaChuyenBay()));
-
-                if(cb.getTrangThai() == ChuyenBay.CONVE || cb.getTrangThai() == ChuyenBay.HETVE){
-                    if(datenow.after(cb.getCBTime())){
-                        UpdateData.capNhatHoanTat(cb.getMaChuyenBay());
-                        cb.setTrangThai(ChuyenBay.HOANTAT);
-                    }
-                }
-
-                Controller.chuyenBayArrayList.add(cb);
-
-            }
-        }catch (Exception e){
-            Logger.getLogger(LoadData.class.getName()).log(Level.SEVERE,"Lỗi load table CHUYENBAY",e);
-        }
+        Controller.chuyenBayArrayList.clear();
+        List<ChuyenBay> list = sendCommand("getChuyenBayList");
+        Controller.chuyenBayArrayList.addAll(list);
     }
 
 
-    public static ArrayList<Ve> loadTableVe(String maChuyenBay){
+//    public static ArrayList<Ve> loadTableVe(String maChuyenBay) {
+//        List<Ve> list = sendCommand("getVeList-" + maChuyenBay);
+//        return (ArrayList<Ve>) list;
+//    }
 
-        ArrayList<Ve> veArrayList = new ArrayList<Ve>();
-        ResultSet rs = DataConnection.retrieveData("select * from ve where MaCB like '"+ maChuyenBay+"'");
-
-        try {
-            while (rs.next()){
-                Ve ve = new Ve(
-                        rs.getString(1).trim(),
-                        rs.getString(2).trim(),
-                        rs.getString(3).trim(),
-                        rs.getString(4).trim(),
-                        rs.getInt(5),
-                        rs.getDate(6),
-                        rs.getString(7).trim(),
-                        rs.getString(8)
-                );
-
-                veArrayList.add(ve);
-            }
-
-        }catch (Exception e){
-            Logger.getLogger(LoadData.class.getName()).log(Level.SEVERE,null,e);
-        }
-        return veArrayList;
+    public static void loadTableTaiKhoan() {
+        Controller.taiKhoanArrayList.clear();
+        List<TaiKhoan> list = sendCommand("getTaiKhoanList");
+        System.out.println(list.size());
+        Controller.taiKhoanArrayList.addAll(list);
     }
 
-    public static void loadTableTaiKhoan(){
-
-        ResultSet rs= DataConnection.retrieveData("select * from taikhoan");
-        try {
-            while(rs.next()){
-                TaiKhoan taiKhoan=new TaiKhoan(
-                        rs.getString(1).trim(),
-                        rs.getString(2).trim(),
-                        rs.getString(3).trim()
-
-                );
-                Controller.taiKhoanArrayList.add(taiKhoan);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public static void loadTableNhanVien(){
+    public static void loadTableNhanVien() {
         Controller.nhanVienArrayList.clear();
-        ResultSet rs = DataConnection.retrieveData("SELECT * FROM NHANVIEN");
-
-        try {
-            while (rs.next()){
-                NhanVien nv = new NhanVien(
-                        rs.getString(1).trim(),
-                        rs.getString(2).trim(),
-                        rs.getString(3).trim(),
-                        rs.getInt(4)
-                );
-
-                Controller.nhanVienArrayList.add(nv);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        List<NhanVien> list = sendCommand("getNhanVienList");
+        Controller.nhanVienArrayList.addAll(list);
     }
+
     public LoadData() {
+
         Controller.duongBayArrayList.clear();
         Controller.sanBayArrayList.clear();
         Controller.mayBayArrayList.clear();
         Controller.chuyenBayArrayList.clear();
         Controller.nhanVienArrayList.clear();
+        Controller.taiKhoanArrayList.clear();
 
         loadTableDuongBay();
         loadTableSanBay();
         loadTableMayBay();
         loadTableChuyenBay();
         loadTableNhanVien();
+        loadTableTaiKhoan();
+
+
+//        try {
+//            socket = new Socket(ADDRESS, PORT);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 }

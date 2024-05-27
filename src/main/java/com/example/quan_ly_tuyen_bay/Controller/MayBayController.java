@@ -26,6 +26,17 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MayBayController implements Initializable {
+    private static MayBayController instance;
+
+    // Phương thức getInstance trả về tham chiếu đến controller
+    public static MayBayController getInstance() {
+        return instance;
+    }
+
+    // Hàm khởi tạo của controller
+    public MayBayController() {
+        instance = this; // Gán tham chiếu đến chính bản thân controller
+    }
 
     @FXML
     private Button btn_huy;
@@ -68,8 +79,6 @@ public class MayBayController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        LoadData.loadTableChuyenBay();
-        LoadData.loadTableMayBay();
         showDataMayBay();
         txt_shmb.setDisable(true);
         txt_hangbay.setDisable(true);
@@ -78,6 +87,7 @@ public class MayBayController implements Initializable {
         btn_huy.setDisable(true);
     }
     public void showDataMayBay(){
+//        LoadData.loadTableChuyenBay();
         LoadData.loadTableMayBay();
         tb_shmb.setCellValueFactory(new PropertyValueFactory<>("SHMB"));
         tb_hangbay.setCellValueFactory(new PropertyValueFactory<>("hangBay"));
@@ -182,7 +192,7 @@ public class MayBayController implements Initializable {
                 clearText();
             }
 
-            showDataMayBay();
+//            showDataMayBay();
 
         }
     }
@@ -217,7 +227,7 @@ public class MayBayController implements Initializable {
                     UpdateData.updateMayBay(mb);
                 }
 
-                showDataMayBay();
+//                showDataMayBay();
                 clearText();
                 txt_hangbay.setDisable(true);
                 txt_soghe.setDisable(true);

@@ -1,6 +1,7 @@
 package com.example.quan_ly_tuyen_bay.Controller;
 
 import com.example.quan_ly_tuyen_bay.Connection.InsertData;
+import com.example.quan_ly_tuyen_bay.Connection.LoadData;
 import com.example.quan_ly_tuyen_bay.Connection.UpdateData;
 import com.example.quan_ly_tuyen_bay.Model.TaiKhoan;
 import com.example.quan_ly_tuyen_bay.Model.Ve;
@@ -21,6 +22,13 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ThongTinVeController implements Initializable {
+//    private static ThongTinVeController instance;
+//    public static  ThongTinVeController getInstance(){
+//        return instance;
+//    }
+//    public ThongTinVeController(){
+//        instance = this;
+//    }
     @FXML
     private Button bt_tieptheo;
 
@@ -50,6 +58,7 @@ public class ThongTinVeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LoadData.loadTableDuongBay();
         lb_title.setText("Thông tin hành khách " + Controller.dsGheChon.size());
         lb_maghe.setText(Controller.dsGheChon.get(Controller.dsVeChon.size()));
         System.out.println(Controller.dsGheChon.size());
@@ -85,6 +94,10 @@ public class ThongTinVeController implements Initializable {
         }
         return  true;
     }
+
+//    public void loadData(){
+//        LoadData.loadTableChuyenBay();
+//    }
 
 
     @FXML
@@ -131,10 +144,6 @@ public class ThongTinVeController implements Initializable {
                 }
             }
             }
-
-
-
-
     }
 
 

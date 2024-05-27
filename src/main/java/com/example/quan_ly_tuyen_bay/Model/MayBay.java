@@ -1,6 +1,9 @@
 package com.example.quan_ly_tuyen_bay.Model;
 
-public class MayBay {
+import java.io.Serializable;
+
+public class MayBay implements Serializable
+{
     private String SHMB;
     private String hangBay;
     private int soGhe;

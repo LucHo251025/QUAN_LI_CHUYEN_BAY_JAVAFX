@@ -28,6 +28,15 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DuongBayController implements Initializable {
+    private static DuongBayController instance;
+
+    // Phương thức getInstance trả về tham chiếu đến controller
+    public static DuongBayController getInstance() {
+        return instance;
+    }
+    public DuongBayController(){
+        instance =this;
+    }
     @FXML
     private Button bt_quayve;
 
@@ -77,7 +86,7 @@ public class DuongBayController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         showData();
-        LoadData.loadTableSanBay();
+//        LoadData.loadTableSanBay();
         btn_them.setDisable(false);
         btn_xoa.setDisable(false);
         btn_sua.setDisable(false);
@@ -96,6 +105,7 @@ public class DuongBayController implements Initializable {
     }
 
     public void showData() {
+        LoadData.loadTableSanBay();
         LoadData.loadTableDuongBay();
 
         tb_maduongbay.setCellValueFactory(new PropertyValueFactory<>("maDuongBay"));
@@ -258,7 +268,7 @@ public class DuongBayController implements Initializable {
                 UpdateData.updateDuongBay(db);
             }
 
-            showData();
+//            showData();
 
         }
     }

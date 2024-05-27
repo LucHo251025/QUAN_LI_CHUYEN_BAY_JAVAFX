@@ -4,11 +4,14 @@ package com.example.quan_ly_tuyen_bay.Model;
 import com.example.quan_ly_tuyen_bay.Connection.LoadData;
 import com.example.quan_ly_tuyen_bay.Controller.Controller;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class ChuyenBay {
+public class ChuyenBay implements Serializable {
     public static final int CONVE = 0;
     public static final int HETVE = 1;
     public static final int HUYCHUYEN = 2;
@@ -21,7 +24,7 @@ public class ChuyenBay {
     private LocalTime gioBay;
     private int trangThai;
     private int tongTien;
-    private ArrayList<Ve> veArrayList = new ArrayList<Ve>();
+    private List<Ve> veArrayList = new ArrayList<Ve>();
 
     public ChuyenBay() {
 
@@ -103,11 +106,11 @@ public class ChuyenBay {
         this.trangThai = trangThai;
     }
 
-    public ArrayList<Ve> getVeArrayList() {
+    public List<Ve> getVeArrayList() {
         return veArrayList;
     }
 
-    public void setVeArrayList(ArrayList<Ve> veArrayList) {
+    public void setVeArrayList(List<Ve> veArrayList) {
         this.veArrayList = veArrayList;
     }
 

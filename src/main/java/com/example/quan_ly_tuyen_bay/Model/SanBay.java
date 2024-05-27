@@ -1,6 +1,8 @@
 package com.example.quan_ly_tuyen_bay.Model;
 
-public class SanBay {
+import java.io.Serializable;
+
+public class SanBay implements Serializable {
     private String maSanBay;
     private String tenSanBay;
     private String diaDiem;

@@ -19,10 +19,14 @@
   <children>
     <AnchorPane fx:id="bt" layoutY="1.0" prefHeight="680.0" prefWidth="199.0" styleClass="main-bg" stylesheets="@../Design/Style.css">
       <children>
-        <Label fx:id="home_giohientai" alignment="CENTER" layoutX="36.0" layoutY="150.0" prefHeight="33.0" prefWidth="131.0" styleClass="shadow" stylesheets="@../Design/Style.css" text="Label" textAlignment="JUSTIFY" textFill="WHITE">
+        <Label fx:id="home_giohientai" alignment="CENTER" layoutX="36.0" layoutY="150.0" prefHeight="33.0" prefWidth="131.0" style="-fx-background-color: #80CBA9;" stylesheets="@../Design/Style.css" text="Label" textAlignment="JUSTIFY" textFill="WHITE">
           <font>
             <Font name="Arial Black" size="18.0" />
           </font>
+               <styleClass>
+                  <String fx:value="shadow" />
+                  <String fx:value="radius" />
+               </styleClass>
         </Label>
         <Label fx:id="home_tennguoidung" alignment="CENTER" layoutX="35.0" layoutY="199.0" prefHeight="33.0" prefWidth="131.0" text="Label" textFill="WHITE">
           <font>

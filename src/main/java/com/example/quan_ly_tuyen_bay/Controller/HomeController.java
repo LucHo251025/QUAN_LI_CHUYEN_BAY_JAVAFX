@@ -101,7 +101,7 @@ public class HomeController implements Initializable {
     private volatile boolean stop = false;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoadData.loadTableChuyenBay();
+//        LoadData.loadTableChuyenBay();
         dayNow = String.valueOf(LocalDate.now());
 //        dayNow="2024-05-15";
         if(Controller.tk.getLoaiTaiKhoan().equals("nhanvien")){
@@ -169,9 +169,16 @@ public class HomeController implements Initializable {
 
     }
     public void close(ActionEvent event){
-        if(event.getSource() == bt_thoat){
-            stop = true;
-            javafx.application.Platform.exit();
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+
+        try {
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/DangNhap.fxml")));
+            stage.setScene(scene);
+            stage.show();
+
+        }  catch (Exception e) {
+            e.printStackTrace();
         }
     }
     public void timeNow(){

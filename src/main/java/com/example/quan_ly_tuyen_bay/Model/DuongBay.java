@@ -4,7 +4,9 @@ package com.example.quan_ly_tuyen_bay.Model;
 import com.example.quan_ly_tuyen_bay.Controller.Controller;
 import com.example.quan_ly_tuyen_bay.Controller.DuongBayController;
 
-public class DuongBay {
+import java.io.Serializable;
+
+public class DuongBay implements Serializable {
     private String maDuongBay;
     private String maSanBayDi;
     private String maSanBayDen;

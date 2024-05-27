@@ -1,12 +1,16 @@
 package com.example.quan_ly_tuyen_bay;
 
+import com.example.quan_ly_tuyen_bay.Client.ClientCRUD;
+import com.example.quan_ly_tuyen_bay.Client.ClientListenUpdate;
+import com.example.quan_ly_tuyen_bay.Client.ClientUpdate;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class HelloApplication extends Application {
     @Override
@@ -16,7 +20,7 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/quan_ly_tuyen_bay/View/DangNhap.fxml"));
 
 //        Parent root = fxmlLoader.load();
-//
+
 //        fxmlLoader.setRoot(root);
 
         Scene scene = new Scene(fxmlLoader.load(), 659, 479);
@@ -24,6 +28,10 @@ public class HelloApplication extends Application {
 
         stage.setScene(scene);
         stage.show();
+
+        new ClientUpdate(new Socket("192.168.1.123", 20003));
+        new ClientCRUD(new Socket("192.168.1.123",20005));
+//        new ClientListenUpdate(new ServerSocket(20003));
     }
 
     public static void main(String[] args) {
