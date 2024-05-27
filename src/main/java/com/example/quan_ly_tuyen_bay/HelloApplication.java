@@ -19,8 +19,9 @@ public class HelloApplication extends Application {
 //
 //        fxmlLoader.setRoot(root);
 
-        Scene scene = new Scene(fxmlLoader.load(), 937, 562);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(fxmlLoader.load(), 659, 479);
+        stage.setTitle("Đăng Nhập");
+
         stage.setScene(scene);
         stage.show();
     }

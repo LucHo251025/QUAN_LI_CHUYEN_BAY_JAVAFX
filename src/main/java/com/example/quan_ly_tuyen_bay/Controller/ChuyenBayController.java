@@ -107,6 +107,7 @@ public class ChuyenBayController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        new LoadData();
         LoadData.loadTableMayBay();
         LoadData.loadTableDuongBay();
         LoadData.loadTableChuyenBay();
@@ -118,10 +119,10 @@ public class ChuyenBayController implements Initializable {
         for(MayBay mb : Controller.mayBayArrayList){
             cb_shmb.getItems().add(mb.getSHMB().trim());
         }
-
         for(DuongBay db : Controller.duongBayArrayList){
             cb_duongbay.getItems().add(db.getMaSanBayDi()+"->"+db.getMaSanBayDen());
         }
+
 
         for (int i = 0; i <= 23; i++) {
             String hour;
@@ -322,10 +323,11 @@ public class ChuyenBayController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/GiaoDienChonSoLuongVe.fxml")));
             stage.setScene(scene);
+            stage.setTitle("Chọn số lượng vé");
             stage.show();
 
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        }  catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -344,7 +346,7 @@ public class ChuyenBayController implements Initializable {
         txt_machuyenbay.setText(txt_machuyenbay.getText().toUpperCase());
 
         if(txt_machuyenbay.getText().equals("")){
-            notification("Vui lòng nhập đầy đử thông tin");
+            notification("Vui lòng nhập đầy đủ thông tin");
             return;
         }
 
@@ -369,8 +371,7 @@ public class ChuyenBayController implements Initializable {
         DuongBay myDuongBay =Controller.duongBayArrayList.get(cb_duongbay.getSelectionModel().getSelectedIndex());
 
         ChuyenBay cb = new ChuyenBay(txt_machuyenbay.getText(),cb_shmb.getValue(),myDuongBay,myDate,myTime,ChuyenBay.CONVE);
-
-        if(home_tbview.getSelectionModel().getFocusedIndex() == -1){
+        if(home_tbview.getSelectionModel().getSelectedIndex() == -1){
             for (ChuyenBay chuyenBay : Controller.chuyenBayArrayList){
                 if(chuyenBay.getMaChuyenBay().equals(cb.getMaChuyenBay())){
                     notification("Chuyến bay đã tồn tại");
@@ -384,6 +385,7 @@ public class ChuyenBayController implements Initializable {
                     return;
                 }
             }
+
             InsertData.insertChuyenBay(cb);
         }else{
             for (ChuyenBay chuyenBay : Controller.chuyenBayArrayList){
@@ -398,9 +400,22 @@ public class ChuyenBayController implements Initializable {
 
             UpdateData.updateChuyenBay(cb);
         }
-
         showData();
+    }
+    @FXML
+    void Thoat(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
 
+        try {
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/Home.fxml")));
+            stage.setScene(scene);
+            stage.setTitle("Home");
+            stage.show();
+
+        }  catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

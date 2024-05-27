@@ -20,11 +20,16 @@ public class ChuyenBay {
     private Date ngayBay;
     private LocalTime gioBay;
     private int trangThai;
+    private int tongTien;
     private ArrayList<Ve> veArrayList = new ArrayList<Ve>();
 
     public ChuyenBay() {
 
     }
+
+
+
+
 
     public ChuyenBay(String maChuyenBay, String SHMB, DuongBay duongBay, Date ngayBay, LocalTime gioBay, int trangThai) {
         this.maChuyenBay = maChuyenBay;
@@ -33,10 +38,22 @@ public class ChuyenBay {
         this.ngayBay = ngayBay;
         this.gioBay = gioBay;
         this.trangThai = trangThai;
+        this.tongTien=getTongTien();
     }
 
 
+    public int getTongTien() {
+        int tongTien=0;
+        for (Ve ve : getVeArrayList()){
+           tongTien+=ve.getGia();
+        }
 
+        return tongTien;
+    }
+
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
+    }
 
     public String getMaChuyenBay() {
         return maChuyenBay;
@@ -100,12 +117,32 @@ public class ChuyenBay {
         for (DuongBay db : Controller.duongBayArrayList) {
             if (db.getMaDuongBay().equals(maDuongBay)) {
 
-                System.out.println("Đã tìm thấy chuyến bây"+db.getMaSanBayDen());
+                System.out.println("Đã tìm thấy chuyến bây "+db.getMaDuongBay());
                 return db;
             }
         }
 
         return null;
+    }
+
+    public int getGia(){
+        for (DuongBay db : Controller.duongBayArrayList){
+            if(db.getMaDuongBay().equals(duongBay.getMaDuongBay())){
+                if(db.getKhoangCach() >=500 && db.getKhoangCach() < 850){
+                    return 2250000;
+                }else if(db.getKhoangCach() >=850 && db.getKhoangCach() < 1000){
+                    return 2790000;
+                }else if(db.getKhoangCach() >=1000 && db.getKhoangCach() < 1280){
+                    return 3400000;
+                }else if(db.getKhoangCach() >=1280){
+                    return 4000000;
+                }else {
+                    return 1000000;
+                }
+            }
+        }
+
+        return  -1;
     }
 
     public int getSoGhe() {

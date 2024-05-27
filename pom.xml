@@ -84,6 +84,11 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13</version> <!-- hoặc phiên bản mới nhất -->
+        </dependency>
+        <dependency>
             <groupId>com.github.almasb</groupId>
             <artifactId>fxgl</artifactId>
             <version>17.2</version>

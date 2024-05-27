@@ -1,10 +1,7 @@
 package com.example.quan_ly_tuyen_bay.Connection;
 
 import com.example.quan_ly_tuyen_bay.Controller.DuongBayController;
-import com.example.quan_ly_tuyen_bay.Model.ChuyenBay;
-import com.example.quan_ly_tuyen_bay.Model.DuongBay;
-import com.example.quan_ly_tuyen_bay.Model.MayBay;
-import com.example.quan_ly_tuyen_bay.Model.SanBay;
+import com.example.quan_ly_tuyen_bay.Model.*;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -128,4 +125,76 @@ public class UpdateData {
         }
         return false;
     }
+    public static boolean capNhatHetVe(String maCb){
+        String splCommand = "UPDATE CHUYENBAY SET TRANGTHAI=? WHERE MACHUYENBAY=?";
+
+        try {
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(splCommand);
+          ps.setInt(1,ChuyenBay.HETVE);
+          ps.setString(2,maCb);
+
+            System.out.println("Chuyến bay "+maCb +" hết vế");
+            return ps.executeUpdate() > 0;
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean capNhatConVe(String maCb){
+        String splCommand = "UPDATE CHUYENBAY SET TRANGTHAI=? WHERE MACHUYENBAY=?";
+
+        try {
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(splCommand);
+            ps.setInt(1,ChuyenBay.CONVE);
+            ps.setString(2,maCb);
+
+            System.out.println("Chuyến bay "+maCb +" còn vế");
+            return ps.executeUpdate() > 0;
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    public static boolean doiMatKhau(TaiKhoan tk,String mk){
+        String sqlCommand = "UPDATE TAIKHOAN SET MATKHAU=? WHERE TENDANGNHAP=?";
+
+        try {
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+
+            ps.setString(1,mk);
+            ps.setString(2,tk.getTenDangNhap());
+
+            return ps.executeUpdate() >0;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updateNhanvien(NhanVien nhanvien) {
+        String sqlCommand = "update NHANVIEN set  LUONG=? " + " where SDT=?"  ;
+
+        try {
+            DataConnection.createStatement();
+            PreparedStatement  ps = DataConnection.connection.prepareStatement(sqlCommand);
+
+            ps.setInt(1, nhanvien.getLuong());
+            ps.setString(2, nhanvien.getSdt());
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception ex) {
+            Logger.getLogger(UpdateData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("sửa nhân viên thất bại");
+        return false;
+    }
+
 }

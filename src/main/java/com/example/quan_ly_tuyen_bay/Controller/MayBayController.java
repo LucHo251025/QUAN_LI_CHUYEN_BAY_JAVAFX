@@ -251,8 +251,8 @@ public class MayBayController implements Initializable {
                 stage.setScene(scene);
                 stage.show();
 
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

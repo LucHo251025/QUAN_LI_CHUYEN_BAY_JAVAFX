@@ -1,11 +1,19 @@
 package com.example.quan_ly_tuyen_bay.Model;
 
 public class NhanVien {
-    String sdt;
-    String tendn;
-    String tenKhachHang;
+    private String sdt;
+    private String tendn;
+    private String tenNhanVien;
+    private int luong;
 
-    public NhanVien(){
+    public NhanVien(String sdt, String tendn, String tenNhanVien, int luong) {
+        this.sdt = sdt;
+        this.tendn = tendn;
+        this.tenNhanVien = tenNhanVien;
+        this.luong = luong;
+    }
+
+    public  NhanVien(){
 
     }
 
@@ -25,17 +33,19 @@ public class NhanVien {
         this.tendn = tendn;
     }
 
-    public String getTenKhachHang() {
-        return tenKhachHang;
+    public String getTenNhanVien() {
+        return tenNhanVien;
     }
 
-    public void setTenKhachHang(String tenKhachHang) {
-        this.tenKhachHang = tenKhachHang;
+    public void setTenNhanVien(String tenNhanVien) {
+        this.tenNhanVien = tenNhanVien;
     }
 
-    public NhanVien(String sdt, String tendn, String tenKhachHang) {
-        this.sdt = sdt;
-        this.tendn = tendn;
-        this.tenKhachHang = tenKhachHang;
+    public int getLuong() {
+        return luong;
+    }
+
+    public void setLuong(int luong) {
+        this.luong = luong;
     }
 }
