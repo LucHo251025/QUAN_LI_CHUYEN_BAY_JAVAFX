@@ -127,9 +127,6 @@ public class ChuyenBayController implements Initializable {
 
         cheDo = 0;
 
-
-
-
         for (MayBay mb : Controller.mayBayArrayList) {
             cb_shmb.getItems().add(mb.getSHMB().trim());
         }
@@ -279,6 +276,24 @@ public class ChuyenBayController implements Initializable {
         date_ngaybay.setValue(null);
         cb_gio.setValue(null);
         cm_phut.setValue(null);
+        bt_huychuyen.setDisable(false);
+        bt_them.setDisable(false);
+        bt_sua.setDisable(false);
+        bt_sua.setDisable(false);
+        tb_dsve.setDisable(false);
+        bt_luu.setDisable(true);
+        bt_huy.setDisable(true);
+        txt_machuyenbay.setDisable(true);
+        cb_shmb.setDisable(true);
+        cb_duongbay.setDisable(true);
+        date_ngaybay.setDisable(true);
+        cb_gio.setDisable(true);
+        cm_phut.setDisable(true);
+
+        radio_huy.setSelected(false);
+        radio_hoantat.setSelected(false);
+        radio_het.setSelected(false);
+        radio_con.setSelected(false);
     }
 
     public void click() {

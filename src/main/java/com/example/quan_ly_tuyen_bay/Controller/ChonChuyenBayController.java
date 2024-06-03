@@ -62,6 +62,7 @@ public class ChonChuyenBayController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/Home.fxml")));
             stage.setScene(scene);
+            stage.setTitle("Home");
             stage.show();
 
         }  catch (Exception e) {
@@ -105,7 +106,7 @@ public class ChonChuyenBayController implements Initializable {
         Stage stage = (Stage) node.getScene().getWindow();
 
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/Home.fxml")));
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/GiaoDienDSVe.fxml")));
             stage.setScene(scene);
             stage.show();
 

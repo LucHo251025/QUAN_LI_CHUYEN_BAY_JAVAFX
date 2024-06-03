@@ -78,6 +78,7 @@ public class SoLuongVeController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/GiaoDienDSVe.fxml")));
             stage.setScene(scene);
+            stage.setTitle("Danh sách vé");
             stage.show();
 
         } catch (IOException e) {

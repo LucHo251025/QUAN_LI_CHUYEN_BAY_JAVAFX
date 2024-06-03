@@ -206,6 +206,7 @@ public class DsVeController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/GiaoDienChuyenBay.fxml")));
             stage.setScene(scene);
+            stage.setTitle("Chuyến Bay");
             stage.show();
 
         } catch (IOException e) {

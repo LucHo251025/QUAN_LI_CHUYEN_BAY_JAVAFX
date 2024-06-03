@@ -21,6 +21,7 @@ module com.example.quan_ly_tuyen_bay {
     requires java.sql;
     requires java.desktop;
     requires itextpdf;
+    requires javafx.media;
 
 
     opens com.example.quan_ly_tuyen_bay to javafx.fxml;

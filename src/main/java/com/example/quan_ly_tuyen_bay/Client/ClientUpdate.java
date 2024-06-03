@@ -91,33 +91,7 @@ public class ClientUpdate {
                     throw new RuntimeException(e);
                 }
 
-//                    try {
-//                        Thread.sleep(10000);
-//                    } catch (InterruptedException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    MayBayController mayBayController = MayBayController.getInstance();
-//                                if (mayBayController != null) {
-//                                    mayBayController.showDataMayBay();
-//                                }
-//                    SanBayController sanBayController = SanBayController.getInstance();
-//                                if(sanBayController != null){
-//                                    sanBayController.showData();
-//                                }
-//                    DuongBayController duongBayController = DuongBayController.getInstance();
-//                                if(duongBayController != null){
-//                                    duongBayController.showData();
-//                                }
-//                    NhanVienController nhanVienController = NhanVienController.getInstance();
-//                                if(nhanVienController != null){
-//                                    nhanVienController.showData();
-//                                }
-//                    ChuyenBayController chuyenBayController = ChuyenBayController.getInstance();
-//                                if(chuyenBayController != null){
-//                                    chuyenBayController.showData();
-//                                }
-//
-//
+
             }
         }).start();
 

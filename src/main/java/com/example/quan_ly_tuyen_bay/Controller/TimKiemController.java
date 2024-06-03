@@ -111,18 +111,23 @@ public class TimKiemController implements Initializable {
 
             String maDuongBay =sanBayDi+sanBayDen;
             System.out.println(maDuongBay);
-            int soGheNguoiLon,soGheTreEm;
-            if(cb_lon.getValue() != null){
+            int soGheNguoiLon = 0;
+            int soGheTreEm= 0;
+            if(cb_lon.getValue() != null && bt_tre.getValue() != null){
                 soGheNguoiLon = Integer.parseInt(cb_lon.getValue());
-            }else {
-                soGheNguoiLon = 0;
-            }
-
-            if(bt_tre.getValue() != null){
                 soGheTreEm = Integer.parseInt(bt_tre.getValue());
-            }else {
+            }else if(cb_lon.getValue() != null && bt_tre.getValue() == null){
+                soGheNguoiLon = Integer.parseInt(cb_lon.getValue());
+                soGheTreEm = 0;
+            }else if(cb_lon.getValue() == null && bt_tre.getValue() != null){
+                soGheNguoiLon = 0;
+                soGheTreEm = Integer.parseInt(bt_tre.getValue());
+            }else if(cb_lon.getValue() == null && bt_tre.getValue() == null){
+                soGheNguoiLon = 0;
                 soGheTreEm = 0;
             }
+
+
 
 
             Controller.soLuongVeChon = soGheNguoiLon+soGheTreEm;

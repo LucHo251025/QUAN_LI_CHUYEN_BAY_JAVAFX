@@ -13,25 +13,12 @@ public class ClientCUDHandleList {
     private ClientUpdateHandleList clientUpdateHandleList;
     //    private ObjectOutputStream oosUpdate;
     private List<ClientCUDHandle> list = new ArrayList<>();
-//    private String id;
-//    private ObjectInputStream ois;
-//    private ObjectOutputStream oos;
-//    MayBayRepo mayBayRepo = new MayBayRepo();
-//    SanBayRepo sanBayRepo = new SanBayRepo();
-//    DuongBayRepo duongBayRepo = new DuongBayRepo();
-//    VeRepo veRepo = new VeRepo();
-//    NhanVienRepo nhanVienRepo = new NhanVienRepo();
-//    TaiKhoanRepo taiKhoanRepo = new TaiKhoanRepo();
-//    ChuyenBayRepo chuyenBayRepo = new ChuyenBayRepo();
 
     public ClientCUDHandleList(ServerSocket serverSocket,
-//                            ObjectOutputStream oosUpdate
                                ClientUpdateHandleList clientUpdateHandleList) {
         this.serverSocket = serverSocket;
         this.clientUpdateHandleList = clientUpdateHandleList;
-//        this.oosUpdate = oosUpdate;
-//        list.add(this);
-//        this.id = String.valueOf(System.currentTimeMillis());
+
         acceptClient();
     }
 

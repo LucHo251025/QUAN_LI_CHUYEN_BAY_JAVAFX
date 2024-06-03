@@ -2,6 +2,7 @@ package com.example.quan_ly_tuyen_bay.Controller;
 
 import com.example.quan_ly_tuyen_bay.Connection.LoadData;
 import com.example.quan_ly_tuyen_bay.Model.TaiKhoan;
+import com.example.quan_ly_tuyen_bay.Server.Repository.GFG2;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.scene.control.PasswordField;
 import java.io.IOException;
 import java.net.URL;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
 
@@ -44,6 +46,7 @@ public class DangNhapController implements Initializable {
 
     private Alert alert;
 
+
     @FXML
     void dangky(ActionEvent event) {
         Node node = (Node) event.getSource();
@@ -61,9 +64,9 @@ public class DangNhapController implements Initializable {
     }
 
     @FXML
-    void handleLogin(ActionEvent event) {
+    void handleLogin(ActionEvent event) throws NoSuchAlgorithmException {
     String name= textten.getText();
-    String pass= textmk.getText();
+    String pass= GFG2.toHexString(GFG2.getSHA(textmk.getText()));
         LoadData.loadTableTaiKhoan();
         int index=-1;
         for(TaiKhoan tk:Controller.taiKhoanArrayList){
@@ -80,12 +83,13 @@ public class DangNhapController implements Initializable {
             if(tk.getMatKhau().equals(pass)){
                 Controller.tk=tk;
 
-                System.out.println(tk.toString());
+                System.out.println(Controller.tk.toString());
                     Node node = (Node) event.getSource();
                     Stage stage = (Stage) node.getScene().getWindow();
 
                     try {
-                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/Home.fxml")));
+                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/Loading.fxml")));
+
                         stage.setScene(scene);
                         stage.show();
 
@@ -129,6 +133,7 @@ public class DangNhapController implements Initializable {
             parent.getChildren().add(passwordField);
         }
     }
+
 
 
     @Override

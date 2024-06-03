@@ -222,6 +222,7 @@ public class DuongBayController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/Home.fxml")));
             stage.setScene(scene);
+            stage.setTitle("Home");
             stage.show();
 
         } catch (IOException e) {

@@ -207,6 +207,7 @@ public class HomeController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/GiaoDienChuyenBay.fxml")));
             stage.setScene(scene);
+            stage.setTitle("Chuyến Bay");
             stage.show();
 
         }  catch (Exception e) {
@@ -237,6 +238,7 @@ public class HomeController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/GiaoDienMayBay.fxml")));
             stage.setScene(scene);
+            stage.setTitle("Máy Bay");
             stage.show();
 
         }  catch (Exception e) {
@@ -252,6 +254,7 @@ public class HomeController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/GiaoDienNhanVien.fxml")));
             stage.setScene(scene);
+            stage.setTitle("Nhân Viên");
             stage.show();
 
         }  catch (Exception e) {
@@ -295,6 +298,7 @@ public class HomeController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/GiaoDienTimKiem.fxml")));
             stage.setScene(scene);
+            stage.setTitle("Tìm kiếm chuyến bay");
             stage.show();
 
         }  catch (Exception e) {
@@ -310,6 +314,7 @@ public class HomeController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/GiaoDienSanBay.fxml")));
             stage.setScene(scene);
+            stage.setTitle("Máy Bay");
             stage.show();
 
         } catch (Exception e) {
@@ -325,6 +330,7 @@ public class HomeController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/GiaoDienThongKe.fxml")));
             stage.setScene(scene);
+            stage.setTitle("Thống Kê");
             stage.show();
 
         } catch (Exception e) {
@@ -340,6 +346,7 @@ public class HomeController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/GiaoDienDoiMatKhau.fxml")));
             stage.setScene(scene);
+            stage.setTitle("Đổi mật khẩu");
             stage.show();
 
         }  catch (Exception e) {

@@ -2,6 +2,7 @@ package com.example.quan_ly_tuyen_bay.Controller;
 
 import com.example.quan_ly_tuyen_bay.Connection.DeleteData;
 import com.example.quan_ly_tuyen_bay.Connection.UpdateData;
+import com.example.quan_ly_tuyen_bay.Server.Repository.GFG2;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -43,6 +45,7 @@ public class DoiMatKhauController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/Home.fxml")));
             stage.setScene(scene);
+            stage.setTitle("Home");
             stage.show();
 
         } catch (IOException e) {
@@ -57,9 +60,12 @@ public class DoiMatKhauController implements Initializable {
     }
     @FXML
     void SAVE(ActionEvent event) {
-        if(mk_cu.getText().equals("") || mk_nhaplai.getText().equals("") || mk_moi.getText().equals("")){
+        try {
+            String mkCu= GFG2.toHexString(GFG2.getSHA(mk_cu.getText()));
+
+        if(mkCu.equals("") || mk_nhaplai.getText().equals("") || mk_moi.getText().equals("")){
             notification("Vui lòng nhập đầy đủ thông tin");
-        }else if(mk_cu.getText().equals(Controller.tk.getMatKhau())== false){
+        }else if(mkCu.equals(Controller.tk.getMatKhau())== false){
             notification("Mật khẩu hiện tại không chính xác");
         }else if(!(mk_moi.getText().equals(mk_nhaplai))== false){
             notification("Xác thực mật khẩu không chính xác");
@@ -71,7 +77,11 @@ public class DoiMatKhauController implements Initializable {
             Optional<ButtonType> optional = alert.showAndWait();
 
             if(optional.get() == ButtonType.OK){
-                UpdateData.doiMatKhau(Controller.tk.getTenDangNhap(),mk_moi.getText());
+
+                    String hashMatkhau= GFG2.toHexString(GFG2.getSHA(mk_moi.getText()));
+                    UpdateData.doiMatKhau(Controller.tk.getTenDangNhap(),hashMatkhau);
+
+
                 Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
 
@@ -85,7 +95,11 @@ public class DoiMatKhauController implements Initializable {
                 }
 
             }
+
         }
+        } catch (NoSuchAlgorithmException e) {
+        throw new RuntimeException(e);
+    }
     }
 
     @Override

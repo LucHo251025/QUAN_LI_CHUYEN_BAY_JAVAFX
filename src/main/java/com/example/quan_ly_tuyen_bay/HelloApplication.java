@@ -15,15 +15,14 @@ import java.net.Socket;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("C:\\Users\\vanth\\IdeaProjects\\DoAn\\Quan_Li_Chuyen_Bay\\src\\main\\resources\\com\\example\\quan_li_chuyen_bay\\View\\Home.fxml"));
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/quan_ly_tuyen_bay/View/DangNhap.fxml"));
 
-//        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
 
-//        fxmlLoader.setRoot(root);
 
-        Scene scene = new Scene(fxmlLoader.load(), 659, 479);
+//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/quan_ly_tuyen_bay/View/Loading.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load(), 800, 450);
         stage.setTitle("Đăng Nhập");
 
         stage.setScene(scene);
@@ -31,7 +30,6 @@ public class HelloApplication extends Application {
 
         new ClientUpdate(new Socket("localhost", 20003));
         new ClientCRUD(new Socket("localhost",20005));
-//        new ClientListenUpdate(new ServerSocket(20003));
     }
 
     public static void main(String[] args) {

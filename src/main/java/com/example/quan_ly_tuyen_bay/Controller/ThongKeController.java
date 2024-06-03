@@ -5,6 +5,8 @@ import com.example.quan_ly_tuyen_bay.Model.ChuyenBay;
 import com.example.quan_ly_tuyen_bay.Model.TaiKhoan;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter; // Import PdfWriter
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -94,6 +96,7 @@ public class ThongKeController implements Initializable {
             }
         }
         sl_nv.setText(String.valueOf(nhanvien));
+        showData();
     }
 
 
@@ -106,6 +109,7 @@ public class ThongKeController implements Initializable {
 //        if(num < 0){
 //            return;
 //        }
+//
     }
 
 
@@ -134,110 +138,82 @@ public class ThongKeController implements Initializable {
     void Print(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save PDF");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("FDF Files","*.pdf"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
         File file = fileChooser.showSaveDialog(null);
 
-        if(file != null){
+        if (file != null) {
             try {
                 Document document = new Document();
                 PdfWriter.getInstance(document, new FileOutputStream(file));
                 document.open();
 
                 BaseFont baseFont = BaseFont.createFont("C:\\Users\\vanth\\IdeaProjects\\HK2\\IO_Stream\\Quan_Ly_Tuyen_Bay\\file\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-                Paragraph nv = new Paragraph(Controller.tk.getTenDangNhap()+"("+Controller.tk.getLoaiTaiKhoan()+")",new Font(baseFont,15,Font.ITALIC));
-                nv.setAlignment(Element.ALIGN_RIGHT);
+                Font fontTitle = new Font(baseFont, 18, Font.BOLD);
+                Font fontHeader = new Font(baseFont, 12, Font.BOLD);
                 Font font = new Font(baseFont, 12);
-                Paragraph title = new Paragraph("Thống kê hóa đơn", new Font(baseFont, 18, Font.BOLD));
 
+                Paragraph nv = new Paragraph(Controller.tk.getTenDangNhap() + " (" + Controller.tk.getLoaiTaiKhoan() + ")", new Font(baseFont, 15, Font.ITALIC));
+                nv.setAlignment(Element.ALIGN_RIGHT);
+                document.add(nv);
+
+                Paragraph title = new Paragraph("Thống kê hóa đơn", fontTitle);
                 title.setAlignment(Element.ALIGN_CENTER);
                 document.add(title);
 
-                Paragraph paragraph1 = new Paragraph();
-                paragraph1.setFont(font);
+                document.add(new Paragraph("\n")); // Add a blank line
 
-                paragraph1.add(new Chunk("Mã chuyến bây"));
-                paragraph1.add(new Chunk("                  "));
+                PdfPTable table = new PdfPTable(4); // 4 columns
+                table.setWidthPercentage(100);
+                table.setSpacingBefore(10f);
+                table.setSpacingAfter(10f);
 
-                paragraph1.add(new Chunk("Máy bay"));
-                paragraph1.add(new Chunk("                  "));
+                // Set Column widths
+                float[] columnWidths = {1f, 1f, 1f, 1f};
+                table.setWidths(columnWidths);
 
-                paragraph1.add(new Chunk("Ngày bay"));
-                paragraph1.add(new Chunk("                  "));
+                // Add table header
+                PdfPCell cell;
 
-                paragraph1.add(new Chunk("Tổng tiền"));
-                paragraph1.setAlignment(Element.ALIGN_CENTER);
+                cell = new PdfPCell(new Paragraph("Mã chuyến bay", fontHeader));
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
 
-                document.add(paragraph1);
-                Paragraph paragraph2 = new Paragraph();
+                cell = new PdfPCell(new Paragraph("Máy bay", fontHeader));
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
 
-                paragraph2.add(new Chunk("-----------------------------------------------------------------------------------------------"));
-                paragraph2.setAlignment(Element.ALIGN_CENTER);
-                 document.add(paragraph2);
+                cell = new PdfPCell(new Paragraph("Ngày bay", fontHeader));
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
 
-                ChuyenBay cbB = tb_View.getSelectionModel().getSelectedItem();
+                cell = new PdfPCell(new Paragraph("Tổng tiền", fontHeader));
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
 
-
-                if(tb_View.getSelectionModel().getSelectedIndex() == -1){
+                // Add table rows
+                if (tb_View.getSelectionModel().getSelectedIndex() == -1) {
                     for (ChuyenBay cb : Controller.chuyenBayArrayList) {
                         if (cb.getTrangThai() == ChuyenBay.HOANTAT) {
-                            Paragraph paragraph = new Paragraph();
-                            paragraph.setFont(font);
-
-//                            paragraph.add(new Chunk("Mã Chuyến bay: "));
-                            paragraph.add(new Chunk(cb.getMaChuyenBay() + "                     ", font));
-
-//                            paragraph.add(new Chunk("MB: "));
-                            paragraph.add(new Chunk(cb.getSHMB() + "                     ", font));
-
-//                            paragraph.add(new Chunk("Ngày bay: "));
-                            paragraph.add(new Chunk(String.valueOf(cb.getNgayBay()) + "                       ", font));
-
-//                            paragraph.add(new Chunk("Tổng tiền: "));
-                            paragraph.add(new Chunk(String.valueOf(cb.getTongTien()) , font));
-                            paragraph.setAlignment(Element.ALIGN_CENTER);
-                            paragraph.add(new Chunk("\n"));
-                            paragraph.add(new Chunk("-----------------------------------------------------------------------------------------------"));
-                            paragraph.add(new Chunk("\n"));
-
-                            paragraph.setAlignment(Element.ALIGN_CENTER);
-                            document.add(paragraph);
-                            document.add(new Paragraph("\n")); // Add a blank line between each record for better readability
+                            table.addCell(new PdfPCell(new Paragraph(cb.getMaChuyenBay(), font)));
+                            table.addCell(new PdfPCell(new Paragraph(cb.getSHMB(), font)));
+                            table.addCell(new PdfPCell(new Paragraph(cb.getNgayBay().toString(), font)));
+                            table.addCell(new PdfPCell(new Paragraph(String.valueOf(cb.getTongTien()), font)));
                         }
                     }
-                }else {
-                    Paragraph paragraph = new Paragraph();
-                    paragraph.setFont(font);
-
-//                    paragraph.add(new Chunk("Mã Chuyến bay: "));
-                    paragraph.add(new Chunk(cbB.getMaChuyenBay() + "                    ", font));
-
-//                    paragraph.add(new Chunk("MB: "));
-                    paragraph.add(new Chunk(cbB.getSHMB() + "                           ", font));
-
-//                    paragraph.add(new Chunk("Ngày bay: "));
-                    paragraph.add(new Chunk(String.valueOf(cbB.getNgayBay()) + "              ", font));
-
-//                    paragraph.add(new Chunk("Tổng tiền: "));
-                    paragraph.add(new Chunk(String.valueOf(cbB.getTongTien()), font));
-                    paragraph.setAlignment(Element.ALIGN_CENTER);
-                    document.add(paragraph);
-
-                    Paragraph paragraph3 = new Paragraph();
-
-                    paragraph3.add(new Chunk("-----------------------------------------------------------------------------------------------"));
-                    paragraph3.add(new Chunk("\n"));
-                    paragraph3.setAlignment(Element.ALIGN_CENTER);
-                    document.add(paragraph3);
-                    document.add(new Paragraph("\n"));
+                } else {
+                    ChuyenBay cbB = tb_View.getSelectionModel().getSelectedItem();
+                    table.addCell(new PdfPCell(new Paragraph(cbB.getMaChuyenBay(), font)));
+                    table.addCell(new PdfPCell(new Paragraph(cbB.getSHMB(), font)));
+                    table.addCell(new PdfPCell(new Paragraph(cbB.getNgayBay().toString(), font)));
+                    table.addCell(new PdfPCell(new Paragraph(String.valueOf(cbB.getTongTien()), font)));
                 }
 
+                document.add(table);
                 document.close();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
-
     }
     @FXML
     void Exit(ActionEvent event) {
@@ -247,6 +223,7 @@ public class ThongKeController implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/Home.fxml")));
             stage.setScene(scene);
+            stage.setTitle("Home");
             stage.show();
 
         }  catch (Exception e) {

@@ -48,4 +48,12 @@ public class TaiKhoan implements Serializable {
         this.loaiTaiKhoan = loaiTaiKhoan;
     }
 
+    @Override
+    public String toString() {
+        return "TaiKhoan{" +
+                "tenDangNhap='" + tenDangNhap + '\'' +
+                ", matKhau='" + matKhau + '\'' +
+                ", loaiTaiKhoan='" + loaiTaiKhoan + '\'' +
+                '}';
+    }
 }

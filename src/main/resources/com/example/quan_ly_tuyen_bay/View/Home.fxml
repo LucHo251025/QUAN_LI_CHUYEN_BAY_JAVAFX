@@ -15,9 +15,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.quan_ly_tuyen_bay.Controller.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="832.0" styleClass="white-bg" stylesheets="@../Design/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.quan_ly_tuyen_bay.Controller.HomeController">
   <children>
-    <AnchorPane fx:id="bt" layoutY="1.0" prefHeight="680.0" prefWidth="199.0" styleClass="main-bg" stylesheets="@../Design/Style.css">
+    <AnchorPane fx:id="bt" prefHeight="680.0" prefWidth="199.0" styleClass="main-bg" stylesheets="@../Design/Style.css">
       <children>
         <Label fx:id="home_giohientai" alignment="CENTER" layoutX="36.0" layoutY="150.0" prefHeight="33.0" prefWidth="131.0" style="-fx-background-color: #80CBA9;" stylesheets="@../Design/Style.css" text="Label" textAlignment="JUSTIFY" textFill="WHITE">
           <font>
@@ -137,7 +137,7 @@
           </ImageView>
       </children>
     </AnchorPane>
-    <AnchorPane layoutX="206.0" layoutY="4.0" prefHeight="671.0" prefWidth="632.0" styleClass="white-bg" stylesheets="@../Design/Style.css">
+    <AnchorPane layoutX="202.0" prefHeight="672.0" prefWidth="638.0" styleClass="white-bg" stylesheets="@../Design/Style.css">
       <children>
         <Label alignment="CENTER" layoutY="5.0" prefHeight="33.0" prefWidth="632.0" text="Chuyến Bay Hôm Nay" textFill="#090606">
           <font>
