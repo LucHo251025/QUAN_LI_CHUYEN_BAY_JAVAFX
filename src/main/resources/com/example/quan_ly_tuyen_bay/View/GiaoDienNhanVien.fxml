@@ -32,22 +32,22 @@
             <TableColumn fx:id="tb_luong" prefWidth="122.66668701171875" text="Lương" />
         </columns>
       </TableView>
-      <Button fx:id="btn_them" layoutX="518.0" layoutY="96.0" mnemonicParsing="false" onAction="#ADD" prefHeight="32.0" prefWidth="73.0" stylesheets="@../Design/Style.css" text="Thêm">
+      <Button fx:id="btn_them" alignment="CENTER_RIGHT" layoutX="518.0" layoutY="96.0" mnemonicParsing="false" onAction="#ADD" prefHeight="32.0" prefWidth="73.0" stylesheets="@../Design/Style.css" text="Thêm">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="shadow" />
          </styleClass></Button>
-      <Button fx:id="btn_sua" layoutX="624.0" layoutY="96.0" mnemonicParsing="false" onAction="#EDIT" prefHeight="32.0" prefWidth="73.0" stylesheets="@../Design/Style.css" text="Sửa ">
+      <Button fx:id="btn_sua" alignment="CENTER_RIGHT" layoutX="624.0" layoutY="96.0" mnemonicParsing="false" onAction="#EDIT" prefHeight="32.0" prefWidth="73.0" stylesheets="@../Design/Style.css" text="Sửa ">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="shadow" />
          </styleClass></Button>
-      <Button fx:id="btn_xoa" layoutX="723.0" layoutY="96.0" mnemonicParsing="false" onAction="#DELETE" prefHeight="32.0" prefWidth="73.0" stylesheets="@../Design/Style.css" text="Xóa">
+      <Button fx:id="btn_xoa" alignment="CENTER_RIGHT" layoutX="723.0" layoutY="96.0" mnemonicParsing="false" onAction="#DELETE" prefHeight="32.0" prefWidth="67.0" stylesheets="@../Design/Style.css" text="Xóa">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="shadow" />
          </styleClass></Button>
-      <Label layoutX="484.0" layoutY="158.0" prefHeight="25.0" prefWidth="105.0" text="Tên nhân viên">
+      <Label layoutX="505.0" layoutY="158.0" prefHeight="25.0" prefWidth="105.0" text="Tên nhân viên">
          <font>
             <Font name="Arial Bold Italic" size="14.0" />
          </font>
@@ -58,7 +58,7 @@
             <String fx:value="shadow" />
          </styleClass>
       </TextField>
-      <Label layoutX="486.0" layoutY="218.0" prefHeight="25.0" prefWidth="105.0" text="SĐT">
+      <Label layoutX="505.0" layoutY="218.0" prefHeight="25.0" prefWidth="105.0" text="SĐT">
          <font>
             <Font name="Arial Bold Italic" size="14.0" />
          </font>
@@ -69,7 +69,7 @@
             <String fx:value="shadow" />
          </styleClass>
       </TextField>
-      <Label layoutX="486.0" layoutY="273.0" prefHeight="25.0" prefWidth="105.0" text="Tên đăng nhập">
+      <Label layoutX="505.0" layoutY="273.0" prefHeight="25.0" prefWidth="105.0" text="Tên đăng nhập">
          <font>
             <Font name="Arial Bold Italic" size="14.0" />
          </font>
@@ -80,7 +80,7 @@
             <String fx:value="shadow" />
          </styleClass>
       </TextField>
-      <Label layoutX="486.0" layoutY="328.0" prefHeight="25.0" prefWidth="105.0" text="Lương">
+      <Label layoutX="505.0" layoutY="328.0" prefHeight="25.0" prefWidth="105.0" text="Lương">
          <font>
             <Font name="Arial Bold Italic" size="14.0" />
          </font>
@@ -101,5 +101,37 @@
             <String fx:value="btn" />
             <String fx:value="shadow" />
          </styleClass></Button>
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="470.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/nhanvien1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="470.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/phone.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="470.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/nhanvien.png" />
+         </image>
+      </ImageView><ImageView fitHeight="32.0" fitWidth="32.0" layoutX="470.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Image/gia1.png" />
+      </image>
+   </ImageView><ImageView fitHeight="25.0" fitWidth="32.0" layoutX="518.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Image/them.png" />
+      </image>
+   </ImageView><ImageView fitHeight="25.0" fitWidth="25.0" layoutX="723.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Image/xoa.png" />
+      </image>
+   </ImageView><ImageView fitHeight="25.0" fitWidth="25.0" layoutX="624.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Image/sua.png" />
+      </image>
+
+   </ImageView>
    </children>
 </AnchorPane>

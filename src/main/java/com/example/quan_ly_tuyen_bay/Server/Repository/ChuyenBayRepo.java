@@ -9,6 +9,8 @@ import com.example.quan_ly_tuyen_bay.Model.DuongBay;
 import com.example.quan_ly_tuyen_bay.Model.Ve;
 import com.example.quan_ly_tuyen_bay.Server.Database.DataConnection;
 
+import java.awt.dnd.DropTarget;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
@@ -25,12 +27,12 @@ public class ChuyenBayRepo {
     VeRepo veRepo = new VeRepo();
 
 
-    public DuongBay timDuongBay(String maDuongBay){
+    public DuongBay timDuongBay(String maDuongBay) {
         List<DuongBay> list = duongBayRepo.findAllDuongBay();
 
-        for(DuongBay db : list){
-            if(db.getMaDuongBay().equals(maDuongBay)){
-                System.out.println("Đã tìm thấy");
+        for (DuongBay db : list) {
+            if (db.getMaDuongBay().equals(maDuongBay)) {
+
                 return db;
             }
         }
@@ -38,15 +40,18 @@ public class ChuyenBayRepo {
         return null;
     }
 
-    public List<ChuyenBay> findAllChuyenBay(){
+    public List<ChuyenBay> findAllChuyenBay() {
 
         List<ChuyenBay> list = new ArrayList<>();
-        ResultSet rs = DataConnection.retrieveData("select * from CHUYENBAY");
 
-        Date datenow = Calendar.getInstance().getTime();
-
-        try {
-            while (rs.next()){
+        try (
+//                ResultSet rs = DataConnection.retrieveData("select * from CHUYENBAY");
+                Connection connection = DataConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement("select * from CHUYENBAY");
+                ResultSet rs = ps.executeQuery();
+        ) {
+            Date datenow = Calendar.getInstance().getTime();
+            while (rs.next()) {
                 ChuyenBay cb = new ChuyenBay(
                         rs.getString(1).trim(),
                         rs.getString(2).trim(),
@@ -59,8 +64,8 @@ public class ChuyenBayRepo {
 
                 cb.setVeArrayList(veRepo.findAllVe(cb.getMaChuyenBay()));
 
-                if(cb.getTrangThai() == ChuyenBay.CONVE || cb.getTrangThai() == ChuyenBay.HETVE){
-                    if(datenow.after(cb.getCBTime())){
+                if (cb.getTrangThai() == ChuyenBay.CONVE || cb.getTrangThai() == ChuyenBay.HETVE) {
+                    if (datenow.after(cb.getCBTime())) {
                         capNhatHoanTat(cb.getMaChuyenBay());
                         cb.setTrangThai(ChuyenBay.HOANTAT);
                     }
@@ -69,125 +74,139 @@ public class ChuyenBayRepo {
                 list.add(cb);
 
             }
-        }catch (Exception e){
-            Logger.getLogger(LoadData.class.getName()).log(Level.SEVERE,"Lỗi load table CHUYENBAY",e);
+        } catch (Exception e) {
+            Logger.getLogger(LoadData.class.getName()).log(Level.SEVERE, "Lỗi load table CHUYENBAY", e);
         }
 
         return list;
     }
 
-    public boolean capNhatHoanTat(String maCB){
-        String splCommand = "update CHUYENBAY set TRANGTHAI = ?" +" where MACHUYENBAY=?";
+    public boolean capNhatHoanTat(String maCB) {
+        String splCommand = "update CHUYENBAY set TRANGTHAI = ?" + " where MACHUYENBAY=?";
 
+//        DataConnection.createStatement();
 
-        try {
-            DataConnection.createStatement();
-            PreparedStatement ps = DataConnection.connection.prepareStatement(splCommand);
+        try (
+                Connection connection =DataConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement(splCommand);
+        ) {
             ps.setInt(1, ChuyenBay.HOANTAT);
-            ps.setString(2,maCB);
+            ps.setString(2, maCB);
 
-            System.out.println("Chuyến bay "+maCB+" hoàn tất");
+            System.out.println("Chuyến bay " + maCB + " hoàn tất");
 
             return ps.executeUpdate() > 0;
-        }catch (Exception e){
+        } catch (Exception e) {
             Logger.getLogger(UpdateData.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return false;
     }
 
-    public boolean addChuyenBay(ChuyenBay cb){
+    public boolean addChuyenBay(ChuyenBay cb) {
         String sqlCommand = "INSERT INTO CHUYENBAY VALUES(?,?,?,?,?,?)";
         System.out.println(cb.toString());
-        try {
-            DataConnection.createStatement();
-            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
-            ps.setString(1,cb.getMaChuyenBay());
-            ps.setString(2,cb.getSHMB());
-            ps.setString(3,cb.getDuongBay().getMaDuongBay());
+//        DataConnection.createStatement();
+        try (
+                Connection connection = DataConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sqlCommand);
+        ) {
+
+            ps.setString(1, cb.getMaChuyenBay());
+            ps.setString(2, cb.getSHMB());
+            ps.setString(3, cb.getDuongBay().getMaDuongBay());
             ps.setDate(4, (java.sql.Date) cb.getNgayBay());
             ps.setTime(5, Time.valueOf(cb.getGioBay()));
-            ps.setInt(6,cb.getTrangThai());
+            ps.setInt(6, cb.getTrangThai());
 
             if (ps.executeUpdate() > 0) {
                 System.out.println("thêm chuyến bay thành công");
                 return true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.println("Thêm thất bại chuyến bay");
         return false;
     }
 
-    public boolean cancelTrip(String mcb){
+    public boolean cancelTrip(String mcb) {
         String sqlCommand = "UPDATE CHUYENBAY SET TRANGTHAI=? WHERE MACHUYENBAY=?";
+//        DataConnection.createStatement();
+        try (
+                Connection connection = DataConnection.getConnection();
+                PreparedStatement ps =connection.prepareStatement(sqlCommand);
+        ) {
 
-        try {
-            DataConnection.createStatement();
-            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
 
-            ps.setInt(1,ChuyenBay.HUYCHUYEN);
-            ps.setString(2,mcb);
+            ps.setInt(1, ChuyenBay.HUYCHUYEN);
+            ps.setString(2, mcb);
 
-            return ps.executeUpdate() >0;
-        }catch (Exception e){
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public boolean updateChuyenBay(ChuyenBay cb){
+    public boolean updateChuyenBay(ChuyenBay cb) {
         String sqlCommand = "UPDATE CHUYENBAY SET NGAYBAY=?,GIOBAY=? WHERE MACHUYENBAY=?";
+//        DataConnection.createStatement();
 
-        try {
-            DataConnection.createStatement();
-            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+        try (
+                Connection connection = DataConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sqlCommand);
+        ) {
 
-            ps.setDate(1,(java.sql.Date) cb.getNgayBay());
+            ps.setDate(1, (java.sql.Date) cb.getNgayBay());
             ps.setTime(2, Time.valueOf(cb.getGioBay()));
-            ps.setString(3,cb.getMaChuyenBay());
-            if(ps.executeUpdate() > 0){
+            ps.setString(3, cb.getMaChuyenBay());
+            if (ps.executeUpdate() > 0) {
                 System.out.println("Sửa thành công chuyến bay");
                 return true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public boolean capNhatHetVe(String maCb){
+    public boolean capNhatHetVe(String maCb) {
         String splCommand = "UPDATE CHUYENBAY SET TRANGTHAI=? WHERE MACHUYENBAY=?";
+//        DataConnection.createStatement();
 
-        try {
-            DataConnection.createStatement();
-            PreparedStatement ps = DataConnection.connection.prepareStatement(splCommand);
-            ps.setInt(1,ChuyenBay.HETVE);
-            ps.setString(2,maCb);
+        try (
+                Connection connection = DataConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement(splCommand);
+        ) {
 
-            System.out.println("Chuyến bay "+maCb +" hết vế");
+            ps.setInt(1, ChuyenBay.HETVE);
+            ps.setString(2, maCb);
+
+            System.out.println("Chuyến bay " + maCb + " hết vế");
             return ps.executeUpdate() > 0;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public boolean capNhatConVe(String maCb){
+    public boolean capNhatConVe(String maCb) {
         String splCommand = "UPDATE CHUYENBAY SET TRANGTHAI=? WHERE MACHUYENBAY=?";
+//        DataConnection.createStatement();
+        try (
+                Connection connection = DataConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement(splCommand);
+        ) {
 
-        try {
-            DataConnection.createStatement();
-            PreparedStatement ps = DataConnection.connection.prepareStatement(splCommand);
-            ps.setInt(1,ChuyenBay.CONVE);
-            ps.setString(2,maCb);
+            ps.setInt(1, ChuyenBay.CONVE);
+            ps.setString(2, maCb);
 
-            System.out.println("Chuyến bay "+maCb +" còn vế");
+            System.out.println("Chuyến bay " + maCb + " còn vế");
             return ps.executeUpdate() > 0;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;

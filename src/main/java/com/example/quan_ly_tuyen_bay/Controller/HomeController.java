@@ -121,6 +121,7 @@ public class HomeController implements Initializable {
         home_tennguoidung.setText(Controller.tk.getTenDangNhap());
         home_chucvu.setText(Controller.tk.getLoaiTaiKhoan());
 
+        LoadData.loadTableChuyenBay();
         for (ChuyenBay cb : Controller.chuyenBayArrayList){
             System.out.println(cb.getNgayBay());
             if(( (ChuyenBay.CONVE == cb.getTrangThai()) || (ChuyenBay.HETVE == cb.getTrangThai()) )&& (String.valueOf(cb.getNgayBay()).equals(dayNow))){

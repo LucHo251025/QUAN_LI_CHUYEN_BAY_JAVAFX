@@ -16,14 +16,15 @@ import java.io.File;
 public class TaoFileXML {
     public static void main(String[] args) {
         try {
-            DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.newDocument();
 
-            TaiKhoan tk = new TaiKhoan("luc","12345","sinhvien");
+            TaiKhoan tk = new TaiKhoan("luc", "12345", "sinhvien");
+            //createElement() tạo một phần tử mới
             Element cb = doc.createElement("taikhoan");
 
-            Element nguoiDung= doc.createElement("nguoidung");
+            Element nguoiDung = doc.createElement("nguoidung");
 
             Element tenDN = doc.createElement("tendangnhap");
             tenDN.setTextContent(tk.getTenDangNhap());
@@ -34,6 +35,7 @@ public class TaoFileXML {
             Element loaiTaiKhoan = doc.createElement("loaiTaiKhoan");
             loaiTaiKhoan.setTextContent(tk.getLoaiTaiKhoan());
 
+            //appendChild() nối phần tử con vào phần tử cha
             nguoiDung.appendChild(tenDN);
             nguoiDung.appendChild(mk);
             nguoiDung.appendChild(loaiTaiKhoan);
@@ -43,16 +45,20 @@ public class TaoFileXML {
 
 
             TransformerFactory tff = TransformerFactory.newInstance();
-            Transformer tf=tff.newTransformer();
-            tf.setOutputProperty(OutputKeys.INDENT,"yes");
-            tf.setOutputProperty("{http://xml.apache.org/xslt}indent-amount","3");
+            Transformer tf = tff.newTransformer();
 
-            DOMSource source=new DOMSource(doc);
-            StreamResult result=new StreamResult(new File("C:\\Users\\vanth\\IdeaProjects\\HK2\\IO_Stream\\Quan_Ly_Tuyen_Bay\\src\\main\\java\\com\\example\\quan_ly_tuyen_bay\\Server\\TaiKhoan.xml"));
-            tf.transform(source,result);
+            //Thiết lập thuộc tính đầu ra để thụt vào trong
+            tf.setOutputProperty(OutputKeys.INDENT, "yes");
+
+            //Thiết lập mức độ thụt đầu dòng là 3 khoảng trắng.
+            tf.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "3");
+
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File("C:\\Users\\vanth\\IdeaProjects\\HK2\\IO_Stream\\Quan_Ly_Tuyen_Bay\\src\\main\\java\\com\\example\\quan_ly_tuyen_bay\\Server\\TaiKhoan.xml"));
+            tf.transform(source, result);
             System.out.println("Ghi file thành công");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

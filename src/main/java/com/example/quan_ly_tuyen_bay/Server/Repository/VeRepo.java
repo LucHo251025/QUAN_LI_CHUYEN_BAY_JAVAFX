@@ -4,6 +4,7 @@ import com.example.quan_ly_tuyen_bay.Connection.LoadData;
 import com.example.quan_ly_tuyen_bay.Model.Ve;
 import com.example.quan_ly_tuyen_bay.Server.Database.DataConnection;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,13 +15,17 @@ import java.util.logging.Logger;
 
 public class VeRepo {
 
-    public List<Ve> findAllVe(String macb){
+    public List<Ve> findAllVe(String macb) {
 
         List<Ve> veArrayList = new ArrayList<Ve>();
-        ResultSet rs = DataConnection.retrieveData("select * from ve where MaCB like '"+ macb+"'");
 
-        try {
-            while (rs.next()){
+
+        try (
+                Connection connection = DataConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement("select * from ve where MaCB like '" + macb + "'");
+                ResultSet rs = ps.executeQuery();
+        ) {
+            while (rs.next()) {
                 Ve ve = new Ve(
                         rs.getString(1).trim(),
                         rs.getString(2).trim(),
@@ -35,57 +40,60 @@ public class VeRepo {
                 veArrayList.add(ve);
             }
 
-        }catch (Exception e){
-            Logger.getLogger(LoadData.class.getName()).log(Level.SEVERE,null,e);
+        } catch (Exception e) {
+            Logger.getLogger(LoadData.class.getName()).log(Level.SEVERE, null, e);
         }
         return veArrayList;
     }
 
 
-    public boolean addVe(List<Ve> dsVe){
-        String sqlCommand ="INSERT INTO VE VALUES(?,?,?,?,?,?,?,?)";
+    public boolean addVe(List<Ve> dsVe) {
+        String sqlCommand = "INSERT INTO VE VALUES(?,?,?,?,?,?,?,?)";
 
-        try {
-            for (Ve ve : dsVe){
-                DataConnection.createStatement();
-                PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
 
-                ps.setString(1,ve.getMaChuyenBay());
-                ps.setString(2,ve.getTenHanhKhach());
-                ps.setString(3,ve.getsDT());
-                ps.setString(4,ve.getMaGhe());
-                ps.setInt(5,ve.getGia());
+        for (Ve ve : dsVe) {
+//            DataConnection.createStatement();
+            try (
+                    Connection connection = DataConnection.getConnection();
+                    PreparedStatement ps = connection.prepareStatement(sqlCommand);
+            ) {
+
+                ps.setString(1, ve.getMaChuyenBay());
+                ps.setString(2, ve.getTenHanhKhach());
+                ps.setString(3, ve.getsDT());
+                ps.setString(4, ve.getMaGhe());
+                ps.setInt(5, ve.getGia());
                 ps.setDate(6, (Date) ve.getNgaysinh());
-                ps.setString(7,ve.getEmail());
-                ps.setString(8,ve.getCccd());
+                ps.setString(7, ve.getEmail());
+                ps.setString(8, ve.getCccd());
 
-                if(ps.executeUpdate() > 0){
-                    System.out.println("Thêm vé thành công");
-                    return  true;
-                }
-
+                ps.executeUpdate() ;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
             }
-        }catch (Exception e){
-            e.printStackTrace();
         }
-        return false;
+
+        System.out.println("Thêm Thành Công");
+        return true;
     }
 
-    public boolean deleteVe(String maCB,String MaGhe){
+    public boolean deleteVe(String maCB, String MaGhe) {
         String sqlCommand = "DELETE FROM VE WHERE MACB=? AND MAGHE=?";
+//        DataConnection.createStatement();
 
-        try {
-            DataConnection.createStatement();
-            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+        try (
+                Connection connection = DataConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sqlCommand);) {
 
-            ps.setString(1,maCB);
-            ps.setString(2,MaGhe);
+            ps.setString(1, maCB);
+            ps.setString(2, MaGhe);
 
-            if(ps.executeUpdate() > 0){
+            if (ps.executeUpdate() > 0) {
                 System.out.println("Hủy vé thành công");
                 return true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -6,6 +6,7 @@ import com.example.quan_ly_tuyen_bay.Connection.UpdateData;
 import com.example.quan_ly_tuyen_bay.Model.ChuyenBay;
 import com.example.quan_ly_tuyen_bay.Model.DuongBay;
 import com.example.quan_ly_tuyen_bay.Model.Ve;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,13 +27,16 @@ import java.util.ResourceBundle;
 
 public class DsVeController implements Initializable {
 
-//    private static DsVeController instance;
-//    public static DsVeController getInstance(){
-//        return instance;
-//    }
-//    public DsVeController(){
-//        instance = this;
-//    }
+    private static DsVeController instance;
+
+    public static DsVeController getInstance() {
+        return instance;
+    }
+
+    public DsVeController() {
+        instance = this;
+    }
+
     @FXML
     private Button bt_huyve;
 
@@ -67,12 +71,13 @@ public class DsVeController implements Initializable {
 
     @FXML
     private TextField txt_ngaysinh;
-
-
     private ArrayList<Button> listGhe = new ArrayList<Button>();
-    @Override
+
+        @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         LoadData.loadTableChuyenBay();
+
         txt_tenkhackhang.setDisable(true);
         txt_sdt.setDisable(true);
         txt_gia.setDisable(true);
@@ -145,8 +150,30 @@ public class DsVeController implements Initializable {
     }
 
 
+    public void LoadGhe(){
+        System.out.println("Load Ghế");
+        Platform.runLater(() -> {
+            LoadData.loadTableChuyenBay();
+            listGhe.clear();
+            pane.getChildren().clear();
+        });
+        new Thread(() -> {
+//            try {
+//                Thread.sleep(3000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+            for(Ve ve : Controller.cb.getVeArrayList()){
+                System.out.println(ve.getMaGhe());
+            }
+            // Tái khởi tạo giao diện trên JavaFX Application Thread
+            Platform.runLater(() -> {
+                initialize(null, null);
+            });
+        }).start();
+        // Reinitialize the controller
 
-
+    }
     private  void  chonGhe(ActionEvent event,Button bt){
         if(Controller.tk.getLoaiTaiKhoan().equals("nhanvien")){
 
@@ -194,9 +221,6 @@ public class DsVeController implements Initializable {
             }
         }
     }
-
-
-
     @FXML
     void Thoat(ActionEvent event) {
 
@@ -213,24 +237,24 @@ public class DsVeController implements Initializable {
             System.err.println(e.getMessage());
         }
     }
+
     @FXML
     void huyVe(ActionEvent event) {
-        alert=new Alert(Alert.AlertType.CONFIRMATION);
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Thông báo");
         alert.setHeaderText("Xác nhận hủy vé");
 
         Optional<ButtonType> optional = alert.showAndWait();
 
-        if(optional.get() == ButtonType.OK){
-            DeleteData.deleteVe(Controller.cb.getMaChuyenBay(),lb_maghe.getText());
-            listGhe.get(Integer.parseInt(lb_maghe.getText())-1).setDisable(true);
-            listGhe.get(Integer.parseInt(lb_maghe.getText())-1).setStyle("-fx-background-color: #f0f0f0;");
+        if (optional.get() == ButtonType.OK) {
+            DeleteData.deleteVe(Controller.cb.getMaChuyenBay(), lb_maghe.getText());
+            listGhe.get(Integer.parseInt(lb_maghe.getText()) - 1).setDisable(true);
+            listGhe.get(Integer.parseInt(lb_maghe.getText()) - 1).setStyle("-fx-background-color: #f0f0f0;");
 
-            if(Controller.cb.getTrangThai() == ChuyenBay.HETVE){
+            if (Controller.cb.getTrangThai() == ChuyenBay.HETVE) {
                 UpdateData.capNhatConVe(Controller.cb.getMaChuyenBay());
             }
         }
     }
-
 }
 

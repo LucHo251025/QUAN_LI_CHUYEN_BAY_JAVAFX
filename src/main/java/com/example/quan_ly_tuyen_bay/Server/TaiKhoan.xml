@@ -1,5 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><taikhoan>
-<nguoidung>
-   <tendangnhap>lucho</tendangnhap><matkhau>9d2012181d2da82fe1a4a3e495261e0f03b483f975bd593a84c404fe3e36883c</matkhau><loaiTaiKhoan>nhanvien</loaiTaiKhoan>
-</nguoidung>
-   </taikhoan>
+<nguoidung><tendangnhap>lucho</tendangnhap><matkhau>2005</matkhau><loaiTaiKhoan>quanli</loaiTaiKhoan></nguoidung><nguoidung><tendangnhap>luc</tendangnhap><matkhau>25102005</matkhau><loaiTaiKhoan>nhanvien</loaiTaiKhoan></nguoidung></taikhoan>

@@ -2,6 +2,7 @@ package com.example.quan_ly_tuyen_bay.Client;
 
 import com.example.quan_ly_tuyen_bay.Controller.*;
 
+import javax.swing.plaf.synth.SynthTreeUI;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -29,7 +30,7 @@ public class ClientUpdate {
             while (true) {
                 try {
                     String request = ois.readUTF();
-                    System.out.println("Nhận lệnh cập nhật từ server: " + request);
+                    System.out.println("Nhận lệnh cập nhật từ server: ClientUpdate " + request);
                     switch (request) {
                         case "updateDataMayBay" -> {
                             MayBayController mayBayController = MayBayController.getInstance();
@@ -67,23 +68,35 @@ public class ClientUpdate {
                         }
 
                         case "updateDataTaiKhoan" -> {
-                            DangKyController dangKyController = DangKyController.getInstance();
-                            if (dangKyController != null) {
-                                dangKyController.loadClassDangKy();
+                                System.out.println("Đã nhận lệnh updateDataTaiKhoan");
+                                DangKyController dangKyController = DangKyController.getInstance();
+                                if (dangKyController != null) {
+                                    System.out.println("DangKyController instance is not null. Calling loadClassDangKy.");
+                                    dangKyController.loadClassDangKy();
+                                } else {
+                                    System.err.println("DangKyController instance is null. Cannot call loadClassDangKy.");
+                                }
+
+                        }
+                        case "doiMatKhau" -> {
+                            DoiMatKhauController doiMatKhauController = DoiMatKhauController.getInstance();
+
+                            if(doiMatKhauController != null){
+                                doiMatKhauController.LoadTaiKhoan();
                             }
                         }
 
-//                        case "updateDataVe" -> {
+                        case "updateDataVe" -> {
 //                            ThongTinVeController thongTinVeController = ThongTinVeController.getInstance();
 //                            if (thongTinVeController != null) {
 //                                thongTinVeController.loadData();
 //                            }
 //
-//                            DsVeController dsVeController = DsVeController.getInstance();
-//                            if(dsVeController != null){
-//                                dsVeController.load();
-//                            }
-//                        }
+                            DsVeController dsVeController = DsVeController.getInstance();
+                            if(dsVeController != null){
+                                dsVeController.LoadGhe();
+                            }
+                        }
                     }
 
 

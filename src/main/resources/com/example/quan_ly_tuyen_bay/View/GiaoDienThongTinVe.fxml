@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="575.0" prefWidth="487.0" stylesheets="@../Design/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.quan_ly_tuyen_bay.Controller.ThongTinVeController">
    <children>
-      <Label fx:id="lb_title" alignment="CENTER" layoutX="147.0" layoutY="14.0" prefHeight="30.0" prefWidth="191.0" text="Title" textFill="#fffefe">
+      <Label fx:id="lb_title" alignment="CENTER" layoutX="63.0" layoutY="14.0" prefHeight="30.0" prefWidth="352.0" text="Title" textFill="#fffefe">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
@@ -25,7 +25,7 @@
          </font>
       </Label>
 
-      <Label alignment="CENTER" layoutX="71.0" layoutY="147.0" prefHeight="37.0" prefWidth="107.0" text="SĐT" textFill="#fffefe">
+      <Label alignment="CENTER" layoutX="71.0" layoutY="141.0" prefHeight="37.0" prefWidth="107.0" text="SĐT" textFill="#fffefe">
 
 
          <font>
@@ -33,7 +33,7 @@
          </font>
       </Label>
 
-      <Label alignment="CENTER" layoutX="92.0" layoutY="392.0" prefHeight="37.0" prefWidth="107.0" text="Mã ghế" textFill="#fffefe">
+      <Label alignment="CENTER" layoutX="71.0" layoutY="392.0" prefHeight="37.0" prefWidth="107.0" text="Mã ghế" textFill="#fffefe">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
@@ -66,7 +66,7 @@
          </font>
       </Button>
 
-      <Label alignment="CENTER" layoutX="92.0" layoutY="452.0" prefHeight="37.0" prefWidth="107.0" text="Giá" textFill="#fffefe">
+      <Label alignment="CENTER" layoutX="71.0" layoutY="452.0" prefHeight="37.0" prefWidth="107.0" text="Giá" textFill="#fffefe">
 
          <font>
             <Font name="System Bold Italic" size="14.0" />
@@ -78,7 +78,7 @@
          </font>
       </Label>
 
-      <Label alignment="CENTER" layoutX="81.0" layoutY="204.0" prefHeight="37.0" prefWidth="107.0" text="CCCD" textFill="#fffefe">
+      <Label alignment="CENTER" layoutX="71.0" layoutY="204.0" prefHeight="37.0" prefWidth="107.0" text="CCCD" textFill="#fffefe">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
@@ -89,7 +89,7 @@
             <String fx:value="shadow" />
          </styleClass>
       </TextField>
-      <Label alignment="CENTER" layoutX="81.0" layoutY="269.0" prefHeight="37.0" prefWidth="107.0" text="Email" textFill="#fffefe">
+      <Label alignment="CENTER" layoutX="71.0" layoutY="269.0" prefHeight="37.0" prefWidth="107.0" text="Email" textFill="#fffefe">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
@@ -100,7 +100,7 @@
             <String fx:value="shadow" />
          </styleClass>
       </TextField>
-      <Label alignment="CENTER" layoutX="81.0" layoutY="326.0" prefHeight="37.0" prefWidth="107.0" text="Ngày sinh" textFill="#fffefe">
+      <Label alignment="CENTER" layoutX="71.0" layoutY="326.0" prefHeight="37.0" prefWidth="107.0" text="Ngày sinh" textFill="#fffefe">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>

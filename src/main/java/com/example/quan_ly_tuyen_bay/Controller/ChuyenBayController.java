@@ -7,6 +7,7 @@ import com.example.quan_ly_tuyen_bay.Connection.UpdateData;
 import com.example.quan_ly_tuyen_bay.Model.ChuyenBay;
 import com.example.quan_ly_tuyen_bay.Model.DuongBay;
 import com.example.quan_ly_tuyen_bay.Model.MayBay;
+import com.example.quan_ly_tuyen_bay.Model.Ve;
 import com.example.quan_ly_tuyen_bay.Server.Repository.DuongBayRepo;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -348,7 +349,10 @@ public class ChuyenBayController implements Initializable {
         for (ChuyenBay cbb : Controller.chuyenBayArrayList) {
             if (cbb.getMaChuyenBay().equals(home_tbview.getSelectionModel().getSelectedItem().getMaChuyenBay())) {
                 Controller.cb = cbb;
-
+                System.out.println("Controller Chuuyen BAy "+Controller.cb.getMaChuyenBay());
+                for (Ve ve : Controller.cb.getVeArrayList()){
+                    System.out.println(ve.toString());
+                }
                 break;
             }
         }

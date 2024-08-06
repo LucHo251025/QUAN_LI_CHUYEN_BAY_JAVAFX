@@ -3,9 +3,12 @@ package com.example.quan_ly_tuyen_bay.Connection;
 
 import com.example.quan_ly_tuyen_bay.Controller.Controller;
 import com.example.quan_ly_tuyen_bay.Model.*;
+import com.example.quan_ly_tuyen_bay.Server.Repository.AES;
 import javafx.scene.control.cell.ComboBoxTreeCell;
 
+import javax.crypto.SecretKey;
 import java.io.*;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,16 +56,14 @@ public class LoadData {
 
             Object receivedObject = ois.readObject();
 
-            if(receivedObject instanceof List){
+            if (receivedObject instanceof List) {
                 dataList = (List<T>) receivedObject;
-            }else {
+            } else {
                 throw new Exception("Nhận được dữ liệu không mong đợi từ máy");
             }
 
         } catch (Exception e) {
-            System.err.println("Lỗi giải mã dữ liệu: " + e.getMessage());
-            System.err.println("Vị trí: " + e.getStackTrace()[0]);
-            System.err.println("Nguyên nhân tiềm ẩn: Dữ liệu bị hỏng hoặc không tương thích lớp");
+            e.printStackTrace();
         }
 
         return dataList;
@@ -83,7 +84,8 @@ public class LoadData {
     public static void loadTableDuongBay() {
         Controller.duongBayArrayList.clear();
         List<DuongBay> list = sendCommand("getDuongBayList");
-            Controller.duongBayArrayList.addAll(list);
+        Controller.duongBayArrayList.addAll(list);
+
 
     }
 
@@ -91,6 +93,12 @@ public class LoadData {
         Controller.chuyenBayArrayList.clear();
         List<ChuyenBay> list = sendCommand("getChuyenBayList");
         Controller.chuyenBayArrayList.addAll(list);
+        for (ChuyenBay cb : Controller.chuyenBayArrayList) {
+            if (cb.getMaChuyenBay().equals(Controller.cb.getMaChuyenBay())) {
+                Controller.cb = cb;
+                break;
+            }
+        }
     }
 
 
@@ -100,10 +108,26 @@ public class LoadData {
 //    }
 
     public static void loadTableTaiKhoan() {
-        Controller.taiKhoanArrayList.clear();
-        List<TaiKhoan> list = sendCommand("getTaiKhoanList");
-        System.out.println(list.size());
-        Controller.taiKhoanArrayList.addAll(list);
+        try {
+            Controller.taiKhoanArrayList.clear();
+            System.out.println("Đang load tài khoản" );
+            SecretKey secretKey = AES.getStaticKey();
+
+            List<TaiKhoan> list = sendCommand("getTaiKhoanList");
+
+            System.out.println(list.size());
+            for (TaiKhoan tk : list) {
+                String giaiMa=AES.decrypt(tk.getMatKhau(), secretKey);
+                tk.setMatKhau(giaiMa);
+                Controller.taiKhoanArrayList.add(tk);
+            }
+
+            for (TaiKhoan tk : Controller.taiKhoanArrayList){
+                System.out.println("Load Data TK:"+tk.toString());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void loadTableNhanVien() {

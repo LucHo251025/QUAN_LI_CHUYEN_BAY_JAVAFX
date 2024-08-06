@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -66,6 +68,31 @@
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font></Label>
+            <ImageView fitHeight="104.0" fitWidth="104.0" layoutX="33.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/nhanvien.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="104.0" fitWidth="104.0" layoutX="271.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/khachhang.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="96.0" fitWidth="83.0" layoutX="306.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/khachhang1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="96.0" fitWidth="83.0" layoutX="306.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/khachhang1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="97.0" fitWidth="104.0" layoutX="514.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/doanhthu.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="29.0" layoutY="192.0" prefHeight="348.0" prefWidth="744.0" stylesheets="@../Design/Style.css">
@@ -83,6 +110,7 @@
                   <TableColumn fx:id="tb_tongtien" prefWidth="162.00003051757812" text="Tổng tiền" />
               </columns>
             </TableView>
+
             <Button fx:id="btn_thongke" layoutX="557.0" layoutY="154.0" mnemonicParsing="false" onAction="#Print" prefHeight="40.0" prefWidth="153.0" text="In thống kê">
                <stylesheets>
                   <URL value="@../Design/Style.css" />
@@ -97,6 +125,7 @@
                </font>
             </Button>
             <Button fx:id="btn_Thoat" layoutX="557.0" layoutY="241.0" mnemonicParsing="false" onAction="#Exit" prefHeight="40.0" prefWidth="153.0" text="Thoát">
+>>>>>>> 4cd87db70bcced837a459f1f22f522606836f1b6
                <stylesheets>
                   <URL value="@../Design/Style.css" />
                </stylesheets>
@@ -109,6 +138,12 @@
                   <Font size="14.0" />
                </font>
             </Button>
+            <ImageView fitHeight="38.0" fitWidth="55.0" layoutX="565.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/in.png" />
+               </image>
+            </ImageView>
+
          </children>
       </AnchorPane>
    </children>

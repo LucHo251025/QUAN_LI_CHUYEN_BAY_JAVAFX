@@ -78,7 +78,8 @@ public abstract class ClientCUDHandle {
                         case "insertVe" -> {
                             List<Ve> dsVe = (ArrayList<Ve>) ois.readObject();
                             veRepo.addVe(dsVe);
-//                            sendUpdate("updateDataChuyenBay");
+
+                            sendUpdate("updateDataVe");
                         }
                         case "updateMayBay" -> {
                             MayBay mbupdate = (MayBay) ois.readObject();
@@ -121,7 +122,7 @@ public abstract class ClientCUDHandle {
                             String tenDn = splip[0];
                             String mk = splip[1];
                             taiKhoanRepo.doiMatKhau(tenDn, mk);
-                            sendUpdate("updateDataTaiKhoan");
+                            sendUpdate("doiMatKhau");
                         }
                         case "updateNhanvien" -> {
                             NhanVien nvUpdate = (NhanVien) ois.readObject();

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="368.0" styleClass="main-bg" stylesheets="@../Design/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.quan_ly_tuyen_bay.Controller.TimKiemController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="369.0" styleClass="main-bg" stylesheets="@../Design/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.quan_ly_tuyen_bay.Controller.TimKiemController">
    <children>
       <Button fx:id="bt_thoat" layoutY="-2.0" mnemonicParsing="false" onAction="#EXIT" prefHeight="31.0" prefWidth="58.0" styleClass="nav-btn" stylesheets="@../Design/Style.css" />
       <ImageView fitHeight="31.0" fitWidth="52.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
@@ -40,10 +40,43 @@
          </font>
       </Label>
       <DatePicker fx:id="date_ngay" layoutX="99.0" layoutY="300.0" prefHeight="31.0" prefWidth="201.0" />
-      <Label layoutX="45.0" layoutY="365.0" prefHeight="20.0" prefWidth="58.0" text="Người lớn" textFill="WHITE" />
-      <Label layoutX="226.0" layoutY="365.0" prefHeight="20.0" prefWidth="58.0" text="Trẻ em" textFill="WHITE" />
+      <Label layoutX="46.0" layoutY="365.0" prefHeight="20.0" prefWidth="58.0" text="Người lớn" textFill="WHITE" />
+      <Label layoutX="238.0" layoutY="365.0" prefHeight="20.0" prefWidth="58.0" text="Trẻ em" textFill="WHITE" />
       <ComboBox fx:id="cb_lon" layoutX="110.0" layoutY="362.0" prefHeight="25.0" prefWidth="58.0" />
-      <ComboBox fx:id="bt_tre" layoutX="271.0" layoutY="362.0" prefHeight="25.0" prefWidth="58.0" />
-      <Button fx:id="bt_timkiem" layoutX="129.0" layoutY="432.0" mnemonicParsing="false" onAction="#SEARCH" prefHeight="31.0" prefWidth="109.0" styleClass="btn1" stylesheets="@../Design/Style.css" text="Tìm kiếm" />
+      <ComboBox fx:id="bt_tre" layoutX="284.0" layoutY="362.0" prefHeight="25.0" prefWidth="58.0" />
+      <Button fx:id="bt_timkiem" alignment="CENTER_RIGHT" layoutX="129.0" layoutY="432.0" mnemonicParsing="false" onAction="#SEARCH" prefHeight="31.0" prefWidth="109.0" styleClass="btn1" stylesheets="@../Design/Style.css" text="Tìm kiếm" />
+      <ImageView fitHeight="31.0" fitWidth="52.0" layoutX="58.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/diemden.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="52.0" layoutX="58.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/xuatphat.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="52.0" layoutX="59.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/ngayba.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="52.0" layoutX="14.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/nguoilon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="52.0" layoutX="200.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/embe1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="52.0" layoutX="139.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/tk.png" />
+         </image>
+      </ImageView>
+
+
    </children>
+
 </AnchorPane>

@@ -12,7 +12,6 @@ public class ClientRHandleList {
     private List<ClientRHandle> list = new ArrayList<>();
 
     public ClientRHandleList(ServerSocket serverSocket
-//                            ObjectOutputStream oosUpdate
     ) {
         this.serverSocket = serverSocket;
         acceptClient();

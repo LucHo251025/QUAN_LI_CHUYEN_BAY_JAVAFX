@@ -92,4 +92,18 @@ public class Ve implements Serializable {
     public void setGia(int gia) {
         this.gia = gia;
     }
+
+    @Override
+    public String toString() {
+        return "Ve{" +
+                "maChuyenBay='" + maChuyenBay + '\'' +
+                ", tenHanhKhach='" + tenHanhKhach + '\'' +
+                ", sDT='" + sDT + '\'' +
+                ", maGhe='" + maGhe + '\'' +
+                ", gia=" + gia +
+                ", ngaysinh=" + ngaysinh +
+                ", email='" + email + '\'' +
+                ", cccd='" + cccd + '\'' +
+                '}';
+    }
 }

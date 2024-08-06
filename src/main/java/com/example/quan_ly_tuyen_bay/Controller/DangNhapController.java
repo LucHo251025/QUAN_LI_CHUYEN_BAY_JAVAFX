@@ -2,7 +2,7 @@ package com.example.quan_ly_tuyen_bay.Controller;
 
 import com.example.quan_ly_tuyen_bay.Connection.LoadData;
 import com.example.quan_ly_tuyen_bay.Model.TaiKhoan;
-import com.example.quan_ly_tuyen_bay.Server.Repository.GFG2;
+import com.example.quan_ly_tuyen_bay.Server.Repository.AES;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 
-import java.io.IOException;
+import javax.swing.plaf.TableUI;
 import java.net.URL;
 
 import java.security.NoSuchAlgorithmException;
@@ -31,22 +31,26 @@ public class DangNhapController implements Initializable {
 
     @FXML
     private Button buttondn;
-
     @FXML
     private CheckBox hienmk;
-
     @FXML
     private Label lbl;
-
     @FXML
     private PasswordField textmk;
-
     @FXML
     private TextField textten;
-
     private Alert alert;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        LoadData.loadTableTaiKhoan();
+
+        for(TaiKhoan tk : Controller.taiKhoanArrayList){
+            System.out.println(tk.getTenDangNhap()+"  "+tk.getMatKhau());
+        }
+
+    }
     @FXML
     void dangky(ActionEvent event) {
         Node node = (Node) event.getSource();
@@ -66,21 +70,23 @@ public class DangNhapController implements Initializable {
     @FXML
     void handleLogin(ActionEvent event) throws NoSuchAlgorithmException {
     String name= textten.getText();
-    String pass= GFG2.toHexString(GFG2.getSHA(textmk.getText()));
-        LoadData.loadTableTaiKhoan();
+    String pass= textmk.getText();
+
         int index=-1;
         for(TaiKhoan tk:Controller.taiKhoanArrayList){
             if(name.equals(tk.getTenDangNhap().trim())){
+
                 index=Controller.taiKhoanArrayList.indexOf(tk);
 
             }
-
         }
         if(index==-1){
             notification("Tài Khoản Không tồn Tại");
         }else {
             TaiKhoan tk=Controller.taiKhoanArrayList.get(index);
-            if(tk.getMatKhau().equals(pass)){
+
+            String mhMK=tk.getMatKhau();
+            if(mhMK.equals(pass)){
                 Controller.tk=tk;
 
                 System.out.println(Controller.tk.toString());
@@ -88,7 +94,7 @@ public class DangNhapController implements Initializable {
                     Stage stage = (Stage) node.getScene().getWindow();
 
                     try {
-                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/Loading.fxml")));
+                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/com/example/quan_ly_tuyen_bay/View/Home.fxml")));
 
                         stage.setScene(scene);
                         stage.show();
@@ -129,16 +135,20 @@ public class DangNhapController implements Initializable {
             passwordField.setStyle(textmk.getStyle());
             // Replace TextField with PasswordField
             AnchorPane parent = (AnchorPane) textmk.getParent();
+            if (parent == null) {
+                System.out.println("Parent is null");
+                // Initialize parent or handle the null case appropriately
+                return;
+            }
             parent.getChildren().remove(textmk);
             parent.getChildren().add(passwordField);
+            parent.getChildren().clear();
         }
     }
 
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-    }
+
     public void notification(String mes){
         alert=new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thông báo");

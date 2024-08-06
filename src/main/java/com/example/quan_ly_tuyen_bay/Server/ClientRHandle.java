@@ -46,16 +46,14 @@ public class ClientRHandle {
                 try {
 
                     String request = ois.readUTF();
-//                    String[] parts = cmd.split("-");
-//                    String request = parts[0];
-//
-//                    String id = parts.length > 1 ? parts[1] : null; // Sử dụng null nếu không có phần id
                     System.out.println("Nhan lenh " + request);
+
                     switch (request) {
                         case "getMayBayList" -> {
                             oos.writeObject(mayBayRepo.findAllMayBay());
                             oos.flush();
                             oos.reset();
+
                         }
                         case "getSanBayList" -> {
                             oos.writeObject(sanBayRepo.findAllSanBay());
@@ -93,12 +91,6 @@ public class ClientRHandle {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-//                            if (cmd.equals("deleteMayBay")) {
-//                                // XU ly Delete
-//
-//                                // gui thong bao ds may bay dc cap nhat
-//                                // clientUpdateList.sendUpdate("DSMayBay)
-//                            }
 
                 System.out.println("aaaa");
             }

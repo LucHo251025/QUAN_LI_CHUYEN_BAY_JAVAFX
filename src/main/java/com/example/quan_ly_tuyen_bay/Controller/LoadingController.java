@@ -31,7 +31,6 @@ public class LoadingController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
-
         File mediaFile = new File("C:\\Users\\vanth\\IdeaProjects\\HK2\\IO_Stream\\Quan_Ly_Tuyen_Bay\\src\\main\\resources\\com\\example\\quan_ly_tuyen_bay\\Image\\video.mp4");
         Media media1 = new Media(mediaFile.toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media1);
@@ -43,13 +42,12 @@ public class LoadingController implements Initializable {
             System.out.println("Media is ready to play!");
             // Bạn có thể đặt thêm mã xử lý khác ở đây, nếu cần
 
-        });
 
+        });
         task = new doWork();
         load.progressProperty().bind(task.progressProperty());
         lable.textProperty().bind(task.messageProperty());
         new Thread(task).start();
-
     }
 
     class doWork extends Task<Void>{

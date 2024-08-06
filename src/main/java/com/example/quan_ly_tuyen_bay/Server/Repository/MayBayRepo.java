@@ -12,13 +12,17 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class  MayBayRepo {
+public class MayBayRepo {
     public List<MayBay> findAllMayBay() {
         List<MayBay> list = new ArrayList<>();
-        ResultSet rs = DataConnection.retrieveData("select * from MAYBAY");
 
-        try {
-            while (rs.next()){
+
+        try (
+                Connection connection = DataConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement("select * from MAYBAY");
+                ResultSet rs = ps.executeQuery();
+        ) {
+            while (rs.next()) {
                 MayBay mayBay = new MayBay(
                         rs.getString(1).trim(),
                         rs.getString(2).trim(),
@@ -26,8 +30,8 @@ public class  MayBayRepo {
                 );
                 list.add(mayBay);
             }
-        }catch (Exception e){
-            Logger.getLogger(LoadData.class.getName()).log(Level.SEVERE,"Lỗi loadData table MAYBAY",e);
+        } catch (Exception e) {
+            Logger.getLogger(LoadData.class.getName()).log(Level.SEVERE, "Lỗi loadData table MAYBAY", e);
         }
 
         return list;
@@ -36,58 +40,64 @@ public class  MayBayRepo {
     public boolean add(MayBay mb) {
         //TODO: Tương tác với DB, thêm mayBay
         String sqlCommand = "INSERT INTO MAYBAY VALUE(?,?,?)";
+//        DataConnection.createStatement();
+        try (
+                Connection connection= DataConnection.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sqlCommand);
+        ) {
 
-        try {
-            DataConnection.createStatement();
-            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
 
-            ps.setString(1,mb.getSHMB());
-            ps.setString(2,mb.getHangBay());
-            ps.setInt(3,mb.getSoGhe());
+            ps.setString(1, mb.getSHMB());
+            ps.setString(2, mb.getHangBay());
+            ps.setInt(3, mb.getSoGhe());
 
-            if(ps.executeUpdate() > 0){
+            if (ps.executeUpdate() > 0) {
                 System.out.println("Thêm thành công máy bay");
                 return true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public boolean updateMayBay(MayBay mb){
-        String sqlCommand = "update MAYBAY set SOGHE= ?"+" where SHMB=?";
+    public boolean updateMayBay(MayBay mb) {
+        String sqlCommand = "update MAYBAY set SOGHE= ?" + " where SHMB=?";
+//        DataConnection.createStatement();
+        try (
+                Connection connection= DataConnection.getConnection();
+                PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+        ) {
 
-        try {
-           DataConnection.createStatement();
-            PreparedStatement ps=DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setInt(1, mb.getSoGhe());
+            ps.setString(2, mb.getSHMB());
 
-            ps.setInt(1,mb.getSoGhe());
-            ps.setString(2,mb.getSHMB());
-
-            if(ps.executeUpdate() > 0){
+            if (ps.executeUpdate() > 0) {
                 System.out.println("Sửa thành công máy bay");
                 return true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public boolean deleteMayBay(String shmb){
+    public boolean deleteMayBay(String shmb) {
         String sqlCommad = "DELETE FROM MAYBAY WHERE SHMB =?";
-        try {
-            DataConnection.createStatement();
-            PreparedStatement ps=DataConnection.connection.prepareStatement(sqlCommad);
-            ps.setString(1,shmb);
+//        DataConnection.createStatement();
+        try (
+                Connection connection= DataConnection.getConnection();
+                PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommad);
+        ) {
 
-            if(ps.executeUpdate() > 0){
+            ps.setString(1, shmb);
+
+            if (ps.executeUpdate() > 0) {
                 System.out.println("Xóa thành công máy bay");
                 return true;
             }
-        }catch (Exception e){
-            Logger.getLogger(LoadData.class.getName()).log(Level.SEVERE,"Lỗi xóa máy bay",e);
+        } catch (Exception e) {
+            Logger.getLogger(LoadData.class.getName()).log(Level.SEVERE, "Lỗi xóa máy bay", e);
         }
         return false;
     }

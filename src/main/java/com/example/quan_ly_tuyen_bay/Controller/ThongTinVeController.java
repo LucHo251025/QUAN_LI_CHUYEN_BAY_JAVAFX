@@ -1,5 +1,6 @@
 package com.example.quan_ly_tuyen_bay.Controller;
 
+import com.example.quan_ly_tuyen_bay.Client.ClientCRUD;
 import com.example.quan_ly_tuyen_bay.Connection.InsertData;
 import com.example.quan_ly_tuyen_bay.Connection.LoadData;
 import com.example.quan_ly_tuyen_bay.Connection.UpdateData;
@@ -59,7 +60,7 @@ public class ThongTinVeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoadData.loadTableDuongBay();
-        lb_title.setText("Thông tin hành khách " + Controller.dsGheChon.size());
+        lb_title.setText("Thông tin hành khách " + (Controller.dsVeChon.size()+1));
         lb_maghe.setText(Controller.dsGheChon.get(Controller.dsVeChon.size()));
         System.out.println(Controller.dsGheChon.size());
         lb_gia.setText(String.valueOf(Controller.cb.getGia()));
@@ -105,7 +106,9 @@ public class ThongTinVeController implements Initializable {
         if(checKIP()){
             java.sql.Date myDate = java.sql.Date.valueOf(date.getValue());
 
-            Controller.dsVeChon.add(new Ve(Controller.cb.getMaChuyenBay(),txt_tenkhachhang.getText(),txt_sdt.getText(),Controller.dsGheChon.get(Controller.dsVeChon.size()),Integer.parseInt(lb_gia.getText()),myDate,txt_email.getText(),txt_cccd.getText()));
+            Controller.dsVeChon.add(new Ve(Controller.cb.getMaChuyenBay(),txt_tenkhachhang.getText(),txt_sdt.getText(),lb_maghe.getText(),Integer.parseInt(lb_gia.getText()),myDate,txt_email.getText(),txt_cccd.getText()));
+            Ve ve=new Ve(Controller.cb.getMaChuyenBay(),txt_tenkhachhang.getText(),txt_sdt.getText(),lb_maghe.getText(),Integer.parseInt(lb_gia.getText()),myDate,txt_email.getText(),txt_cccd.getText());
+            System.out.println("Danh sách vé "+ve.toString());
             if((Controller.dsVeChon.size()) < Controller.dsGheChon.size()){
                 Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
@@ -119,7 +122,11 @@ public class ThongTinVeController implements Initializable {
                     System.err.println(e.getMessage());
                 }
             }else {
+                for (Ve ve1 : Controller.dsVeChon){
+                    System.out.println("Danh sách vé chọn "+ve1.toString());
+                }
                 InsertData.insertVe(Controller.dsVeChon);
+
                 if(Controller.cb.getSoGheTrong() == Controller.soLuongVeChon){
                     UpdateData.capNhatHetVe(Controller.cb.getMaChuyenBay());
                 }
@@ -131,6 +138,7 @@ public class ThongTinVeController implements Initializable {
                     }
                 }
                 Controller.soLuongVeChon=-1;
+
                 Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
 

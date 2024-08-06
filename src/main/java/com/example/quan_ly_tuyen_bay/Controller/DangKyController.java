@@ -4,6 +4,7 @@ import com.example.quan_ly_tuyen_bay.Connection.InsertData;
 import com.example.quan_ly_tuyen_bay.Connection.LoadData;
 import com.example.quan_ly_tuyen_bay.Model.NhanVien;
 import com.example.quan_ly_tuyen_bay.Model.TaiKhoan;
+import com.example.quan_ly_tuyen_bay.Server.Repository.AES;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import javax.crypto.SecretKey;
 import java.io.IOException;
 
 public class DangKyController {
@@ -46,11 +48,13 @@ public class DangKyController {
     private PasswordField txt_xacthucmk;
     private String loaiTaiKhoan;
     private static DangKyController instance;
-    public static DangKyController getInstance(){
+
+    // Phương thức getInstance trả về tham chiếu đến controller
+    public static DangKyController getInstance() {
         return instance;
     }
     public DangKyController(){
-        instance = this;
+        instance =this;
     }
     public void loadClassDangKy(){
         LoadData.loadTableTaiKhoan();
@@ -116,13 +120,22 @@ public class DangKyController {
                     ckbnhanvien.setSelected(false);
                     loaiTaiKhoan = "quanli";
                 }
+                try {
+                    SecretKey secretKey = AES.getStaticKey();
+                    String maHoaMK= AES.encrypt(txt_mk.getText(),secretKey);
+
+                    System.out.println("Mật khẩu sau khi mã hóa và gửi qua server: "+maHoaMK);
+
+                    TaiKhoan tk =new TaiKhoan(txt_tendn.getText(),maHoaMK,loaiTaiKhoan);
+                    NhanVien nv= new NhanVien(txt_sdt.getText(), txt_tendn.getText(),txt_hoten.getText(),0);
+
+                    InsertData.inserTaiKhoan(tk);
+                    InsertData.inserNhanVien(nv);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
 
-                TaiKhoan tk =new TaiKhoan(txt_tendn.getText(),txt_mk.getText(),loaiTaiKhoan);
-                NhanVien nv= new NhanVien(txt_sdt.getText(), txt_tendn.getText(),txt_hoten.getText(),0);
-
-                InsertData.inserTaiKhoan(tk);
-                InsertData.inserNhanVien(nv);
 
                 Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
